@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: orientdb-pv-claim
+  labels:
+    app: orientdbService
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: orientdbservice 
+spec:
+  replicas: 1
+  template:
+    metadata:
+     name: orientdbservice
+     labels:
+       run: orientdbservice
+       test: orientdbservice
+    spec:
+      containers:
+        - name: orientdbservice
+          image: orientdb:2.2.26
+          env:
+           - name: ORIENTDB_ROOT_PASSWORD
+             value: "rootpwd"
+          ports:
+          - containerPort: 2480
+            name: orientdb
+          volumeMounts:
+          - name: orientdb-config
+            mountPath: /opt/orientdb/config
+          - name: orientdb-databases
+            mountPath: /opt/orientdb/databases 
+          - name: orientdb-backup
+            mountPath: /opt/orientdb/backup
+      volumes:
+          - name: orientdb-config
+            persistentVolumeClaim:
+              claimName: orientdb-pv-claim
+          - name: orientdb-databases
+            persistentVolumeClaim:
+              claimName: orientdb-pv-claim
+          - name: orientdb-backup
+            persistentVolumeClaim:
+              claimName: orientdb-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orientdbservice
+  labels:
+    run: orientdbservice
+spec:
+  type: NodePort
+  selector:
+    run: orientdbservice
+  ports:
+   - protocol: TCP
+     port: 2480
+     name: http
