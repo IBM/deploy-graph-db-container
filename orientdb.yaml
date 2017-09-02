@@ -2,6 +2,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: orientdb-pv-claim
+  annotations:
+    volume.beta.kubernetes.io/storage-class: ""
   labels:
     app: orientdbService
 spec:
@@ -9,7 +11,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
+      storage: 5Gi
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -34,20 +36,17 @@ spec:
           - containerPort: 2480
             name: orientdb
           volumeMounts:
-          - name: orientdb-config
-            mountPath: /opt/orientdb/config
-          - name: orientdb-databases
-            mountPath: /opt/orientdb/databases 
-          - name: orientdb-backup
-            mountPath: /opt/orientdb/backup
+          - mountPath: /data/orientdb/config
+            name: orientdb-data
+            subPath: config
+          - mountPath: /data/orientdb/databases
+            name: orientdb-data
+            subPath: databases
+          - mountPath: /data/orientdb/backup
+            name: orientdb-data
+            subPath: backup
       volumes:
-          - name: orientdb-config
-            persistentVolumeClaim:
-              claimName: orientdb-pv-claim
-          - name: orientdb-databases
-            persistentVolumeClaim:
-              claimName: orientdb-pv-claim
-          - name: orientdb-backup
+          - name: orientdb-data
             persistentVolumeClaim:
               claimName: orientdb-pv-claim
 ---
