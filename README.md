@@ -7,73 +7,75 @@ Setup Bluemix and Kubernetes CLI as per instructions in https://console.bluemix.
 1. Download and Install Bluemix CLI as per instructions in https://clis.ng.bluemix.net/ui/home.html. Bluemix CLI provides the command line interface to manage applications, containers, infrastructures, services and other resources in Bluemix. The prefix for running commands by using the Bluemix CLI is `bx`.
 
 2. Install the IBM Bluemix Container Service plug-in, which allows you to create Kubernetes clusters and manage worker nodes. The prefix for running commands by using the IBM Bluemix Container Service plug-in is `bx cs`.
-   ```
-   $ bx plugin install container-service -r Bluemix
-   ```
+    ```
+    $ bx plugin install container-service -r Bluemix
+    ```
 
 3. Install Kubernetes CLI. This allows you to deploy apps into your Kubernetes clusters and to view a local version of the Kubernetes dashboard. The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
     Instructions for installing Kubernetes CLI on macOS are given below. Please see https://kubernetes.io/docs/tasks/tools/install-kubectl/ for other methods to install `kubectl` and for instructions to install Kubernetes CLI on other platforms.
-   *  Download the Kubernetes CLI
+    *  Download the Kubernetes CLI
       ```
       $ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl
       ```
-   * Make the kubectl binary executable.
+    * Make the kubectl binary executable.
       ```
       $ chmod +x kubectl
       ```
-   *  Move the binary in to your PATH.
+    *  Move the binary in to your PATH.
       ```
       $ sudo mv ./kubectl /usr/local/bin/
       ```
 
 ***Task 2 - Log in to the Bluemix CLI and initialize Bluemix Container Service plugin***
-    1. Log in to the Bluemix CLI. Enter your Bluemix credentials when prompted.
-        ```
-        $ bx login -a api.ng.bluemix.net
-        $ bx target --cf
-        ```
-        The API endpoint for various Bluemix regions is given below. If you have private Docker images that are stored in the container registry of a specific Bluemix region, or Bluemix services instances that you have already created, log in to this region to access your images and Bluemix services. The Bluemix region that you log in to also determines the region where you can create your Kubernetes clusters, including the available datacenters.
 
-        - US South
-            ```
-            bx login -a api.ng.bluemix.net
-            ```
-        - United Kingdom
-            ```
-            bx login -a api.eu-gb.bluemix.net
-            ```
-        - Germany
-            ```
-            bx login -a api.eu-de.bluemix.net
-            ```
-        - Sydney
-            ```
-            bx login -a api.au-syd.bluemix.net
-            ```
 
-    2. Initialize the IBM Bluemix Container Service plugin
-        ```
-        $ bx cs init
-        ```
-        If you want to create a Kubernetes cluster in a region other than the Bluemix region that you selected earlier, specify this region.
+1. Log in to the Bluemix CLI. Enter your Bluemix credentials when prompted.
+    ```
+    $ bx login -a api.ng.bluemix.net
+    $ bx target --cf
+    ```
+    The API endpoint for various Bluemix regions is given below. If you have private Docker images that are stored in the container registry of a specific Bluemix region, or Bluemix services instances that you have already created, log in to this region to access your images and Bluemix services. The Bluemix region that you log in to also determines the region where you can create your Kubernetes clusters, including the available datacenters.
 
-       - US South
-          ```
-          bx cs init --host https://us-south.containers.bluemix.net
-          ```
-       - UK-South
-          ```
-          bx cs init --host https://uk-south.containers.bluemix.net
-          ```
-       - EU-Central
-          ```
-          bx cs init --host https://eu-central.containers.bluemix.net
-          ```
-       - AP-South
-          ```
-          bx cs init --host https://ap-south.containers.bluemix.net
-          ```
+    - US South
+        ```
+        bx login -a api.ng.bluemix.net
+        ```
+    - United Kingdom
+        ```
+        bx login -a api.eu-gb.bluemix.net
+        ```
+    - Germany
+        ```
+        bx login -a api.eu-de.bluemix.net
+        ```
+    - Sydney
+        ```
+        bx login -a api.au-syd.bluemix.net
+        ```
+
+2. Initialize the IBM Bluemix Container Service plugin
+    ```
+    $ bx cs init
+    ```
+    If you want to create a Kubernetes cluster in a region other than the Bluemix region that you selected earlier, specify this region.
+
+    - US South
+      ```
+      bx cs init --host https://us-south.containers.bluemix.net
+      ```
+    - UK-South
+      ```
+      bx cs init --host https://uk-south.containers.bluemix.net
+      ```
+    - EU-Central
+      ```
+      bx cs init --host https://eu-central.containers.bluemix.net
+      ```
+    - AP-South
+      ```
+      bx cs init --host https://ap-south.containers.bluemix.net
+      ```
 
 ***Task 3 - Setting up your cluster environment***
 
