@@ -98,14 +98,14 @@ Setup your Kubernetes cluster on Bluemix as per instructions in https://console.
     $ bx cs cluster-config mycluster1
     ```
     Set the KUBECONFIG environment variable as per output from above command
-        ```
-        $ export KUBECONFIG=~/.bluemix/plugins/container-service/clusters/mycluster1/kube-config-hou02-mycluster1.yml
-        $ echo $KUBECONFIG
-        ```
+    ```
+    $ export KUBECONFIG=~/.bluemix/plugins/container-service/clusters/mycluster1/kube-config-hou02-mycluster1.yml
+    $ echo $KUBECONFIG
+    ```
     Verify that the kubectl commands run properly with your cluster by checking the Kubernetes CLI server version.
-        ```
-        $ kubectl version  --short
-        ```
+    ```
+    $ kubectl version  --short
+    ```
 
 ***Task 4 - Deploying OrientDB service into Kubernetes clusters***
 
