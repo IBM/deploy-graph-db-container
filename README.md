@@ -15,17 +15,17 @@ Setup Bluemix and Kubernetes CLI as per instructions in https://console.bluemix.
 
     Instructions for installing Kubernetes CLI on macOS are given below. Please see https://kubernetes.io/docs/tasks/tools/install-kubectl/ for other methods to install `kubectl` and for instructions to install Kubernetes CLI on other platforms.
     *  Download the Kubernetes CLI
-      ```
-      $ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl
-      ```
+        ```
+        $ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl
+        ```
     * Make the kubectl binary executable.
-      ```
-      $ chmod +x kubectl
-      ```
+        ```
+        $ chmod +x kubectl
+        ```
     *  Move the binary in to your PATH.
-      ```
-      $ sudo mv ./kubectl /usr/local/bin/
-      ```
+        ```
+        $ sudo mv ./kubectl /usr/local/bin/
+        ```
 
 ***Task 2 - Log in to the Bluemix CLI and initialize Bluemix Container Service plugin***
 
@@ -39,19 +39,19 @@ Setup Bluemix and Kubernetes CLI as per instructions in https://console.bluemix.
 
     - US South
         ```
-        bx login -a api.ng.bluemix.net
+        $ bx login -a api.ng.bluemix.net
         ```
     - United Kingdom
         ```
-        bx login -a api.eu-gb.bluemix.net
+        $ bx login -a api.eu-gb.bluemix.net
         ```
     - Germany
         ```
-        bx login -a api.eu-de.bluemix.net
+        $ bx login -a api.eu-de.bluemix.net
         ```
     - Sydney
         ```
-        bx login -a api.au-syd.bluemix.net
+        $ bx login -a api.au-syd.bluemix.net
         ```
 
 2. Initialize the IBM Bluemix Container Service plugin
@@ -62,19 +62,19 @@ Setup Bluemix and Kubernetes CLI as per instructions in https://console.bluemix.
 
     - US South
       ```
-      bx cs init --host https://us-south.containers.bluemix.net
+      $ bx cs init --host https://us-south.containers.bluemix.net
       ```
     - UK-South
       ```
-      bx cs init --host https://uk-south.containers.bluemix.net
+      $ bx cs init --host https://uk-south.containers.bluemix.net
       ```
     - EU-Central
       ```
-      bx cs init --host https://eu-central.containers.bluemix.net
+      $ bx cs init --host https://eu-central.containers.bluemix.net
       ```
     - AP-South
       ```
-      bx cs init --host https://ap-south.containers.bluemix.net
+      $ bx cs init --host https://ap-south.containers.bluemix.net
       ```
 
 ***Task 3 - Setting up your cluster environment***
