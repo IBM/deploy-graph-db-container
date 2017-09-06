@@ -60,7 +60,7 @@ Setup Bluemix and Kubernetes CLI as per instructions in https://console.bluemix.
 
 5. Install Kubernetes CLI. This allows you to deploy apps into your Kubernetes clusters and to view a local version of the Kubernetes dashboard. The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
-    Instructions for installing Kubernetes CLI on macOS are given below. https://kubernetes.io/docs/tasks/tools/install-kubectl/ gives other methods to install `kubectl` as well as installation instructions for other platforms.
+    Instructions for installing Kubernetes CLI on macOS are given below. Please see https://kubernetes.io/docs/tasks/tools/install-kubectl/ for other methods to install `kubectl` and for instructions to install Kubernetes CLI on other platforms.
    *  Download the Kubernetes CLI
       ```
       $ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl
@@ -88,77 +88,77 @@ Setup Bluemix and Kubernetes CLI as per instructions in https://console.bluemix.
 Setup your Kubernetes cluster on Bluemix as per instructions in https://console.bluemix.net/docs/containers/cs_tutorials.html#cs_cluster_tutorial. The steps are repeated here for quick reference.
 
 1. Create your lite Kubernetes cluster.
-```
-$ bx cs cluster-create --name mycluster1
-```
-Note: It can take up to 15 minutes for the worker node machine to be ordered and for the cluster to be set up and provisioned.
+    ```
+    $ bx cs cluster-create --name mycluster1
+    ```
+    Note: It can take up to 15 minutes for the worker node machine to be ordered and for the cluster to be set up and provisioned.
 
 2. Verify that the deployment of your worker node is complete.
-```
-$ bx cs clusters
-$ bx cs workers mycluster1
-```
+    ```
+    $ bx cs clusters
+    $ bx cs workers mycluster1
+    ```
 
 3. Download the Kubernetes configuration files and get the command to set the environment variable
-```
-$ bx cs cluster-config mycluster1
-```
-Set the KUBECONFIG environment variable as per output from above command
-```
-$ export KUBECONFIG=~/.bluemix/plugins/container-service/clusters/mycluster1/kube-config-hou02-mycluster1.yml
-$ echo $KUBECONFIG
-```
-Verify that the kubectl commands run properly with your cluster by checking the Kubernetes CLI server version.
-```
-$ kubectl version  --short
-```
+    ```
+    $ bx cs cluster-config mycluster1
+    ```
+    Set the KUBECONFIG environment variable as per output from above command
+        ```
+        $ export KUBECONFIG=~/.bluemix/plugins/container-service/clusters/mycluster1/kube-config-hou02-mycluster1.yml
+        $ echo $KUBECONFIG
+        ```
+    Verify that the kubectl commands run properly with your cluster by checking the Kubernetes CLI server version.
+        ```
+        $ kubectl version  --short
+        ```
 
 ***Task 3 - Deploying OrientDB service into Kubernetes clusters***
 
 1. Clone or download the OrientDB Kubernetes configuration scripts to your user home directory.
-```
-$ git clone https://github.com/IBM/deploy-graph-db-container.git
-```
-Navigate to the source directory
-```
-$ cd deploy-graph-db-container
-$ ls
-```
+    ```
+    $ git clone https://github.com/IBM/deploy-graph-db-container.git
+    ```
+    Navigate to the source directory
+    ```
+    $ cd deploy-graph-db-container
+    $ ls
+    ```
 
 2. Run the OrientDB Kubernetes configuration script in the cluster. When the deployment and the service are created, OrientDB is available as a service for users.
-```
-$ kubectl apply -f local-volumes.yaml
-$ kubectl apply -f orientdb.yaml
-```
+    ```
+    $ kubectl apply -f local-volumes.yaml
+    $ kubectl apply -f orientdb.yaml
+    ```
 
 3. Open OrientDB dashboard
 Get information about the service to see which NodePort was assigned.
-```
-$ kubectl describe service orientdbservice
-```
-Get the public IP address for the worker node in the cluster.
-```
-$ bx cs workers mycluster1
-```
-Open a browser and check out the OrientDB dashboard with the following URL: http://&lt;IP_address&gt;:&lt;NodePort&gt;/studio/index.html
+    ```
+    $ kubectl describe service orientdbservice
+    ```
+    Get the public IP address for the worker node in the cluster.
+    ```
+    $ bx cs workers mycluster1
+    ```
+    Open a browser and check out the OrientDB dashboard with the following URL: http://&lt;IP_address&gt;:&lt;NodePort&gt;/studio/index.html
 
 4. View a local version of the Kubernetes dashboard.
-Launch your Kubernetes dashboard with the default port 8001.
-```
-$ kubectl proxy
-```
-Open the following URL in a web browser to see the Kubernetes dashboard.
-http://localhost:8001/ui
+    Launch your Kubernetes dashboard with the default port 8001.
+    ```
+    $ kubectl proxy
+    ```
+    Open the following URL in a web browser to see the Kubernetes dashboard.
+    http://localhost:8001/ui
 
-  In the Workloads tab, you can see the resources that you created. When you are done exploring the Kubernetes dashboard, use CTRL+C to exit the proxy command.
+    In the Workloads tab, you can see the resources that you created. When you are done exploring the Kubernetes dashboard, use CTRL+C to exit the proxy command.
 
 
 ***Task 4 - Deleting the service when it is no more needed***
 
 * In case you want to delete the OrientDB service from your Bluemix Kubernetes cluster, then run the following command:
-```
-$ kubectl delete -f orientdb.yaml
-```
+    ```
+    $ kubectl delete -f orientdb.yaml
+    ```
 
 ***References***
 * Persistent data storage options in Bluemix Kubernetes Clusters
