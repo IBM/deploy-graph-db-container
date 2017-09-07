@@ -5,10 +5,10 @@ metadata:
   annotations:
     volume.beta.kubernetes.io/storage-class: ""
   labels:
-    app: orientdbService
+    service: orientdb
 spec:
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi
@@ -16,51 +16,53 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: orientdbservice 
+  name: orientdbservice
 spec:
   replicas: 1
   template:
     metadata:
-     name: orientdbservice
-     labels:
-       run: orientdbservice
-       test: orientdbservice
+      name: orientdbservice
+      labels:
+        service: orientdb
     spec:
       containers:
-        - name: orientdbservice
-          image: orientdb:2.2.26
-          env:
-           - name: ORIENTDB_ROOT_PASSWORD
-             value: "rootpwd"
-          ports:
-          - containerPort: 2480
-            name: orientdb
-          volumeMounts:
-          - mountPath: /data/orientdb/config
-            name: orientdb-data
-            subPath: config
-          - mountPath: /data/orientdb/databases
-            name: orientdb-data
-            subPath: databases
-          - mountPath: /data/orientdb/backup
-            name: orientdb-data
-            subPath: backup
+      - name: orientdbservice
+        image: orientdb:2.2.26
+        env:
+        - name: ORIENTDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: orientdb-pass
+              key: password.txt
+        ports:
+        - containerPort: 2480
+          name: orientdb
+        volumeMounts:
+        - mountPath: /data/orientdb/config
+          name: orientdb-data
+          subPath: config
+        - mountPath: /data/orientdb/databases
+          name: orientdb-data
+          subPath: databases
+        - mountPath: /data/orientdb/backup
+          name: orientdb-data
+          subPath: backup
       volumes:
-          - name: orientdb-data
-            persistentVolumeClaim:
-              claimName: orientdb-pv-claim
+      - name: orientdb-data
+        persistentVolumeClaim:
+          claimName: orientdb-pv-claim
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: orientdbservice
   labels:
-    run: orientdbservice
+    service: orientdb
 spec:
   type: NodePort
   selector:
     run: orientdbservice
   ports:
-   - protocol: TCP
-     port: 2480
-     name: http
+  - protocol: TCP
+    port: 2480
+    name: http
