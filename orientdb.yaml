@@ -2,10 +2,11 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: orientdb-pv-claim
-  annotations:
-    volume.beta.kubernetes.io/storage-class: ""
   labels:
     service: orientdb
+    type: pv-claim
+  annotations:
+    volume.beta.kubernetes.io/storage-class: ""
 spec:
   accessModes:
   - ReadWriteOnce
@@ -17,6 +18,8 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: orientdbservice
+  labels:
+    service: orientdb
 spec:
   replicas: 1
   template:
@@ -24,6 +27,7 @@ spec:
       name: orientdbservice
       labels:
         service: orientdb
+        type: container-deployment
     spec:
       containers:
       - name: orientdbservice
@@ -58,10 +62,12 @@ metadata:
   name: orientdbservice
   labels:
     service: orientdb
+    type: nodeport-service
 spec:
   type: NodePort
   selector:
-    run: orientdbservice
+    service: orientdb
+    type: container-deployment
   ports:
   - protocol: TCP
     port: 2480

@@ -89,7 +89,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     $ bx cs cluster-create --name mycluster1
     ```
     Note: It can take up to 15 minutes for the worker node machine to be ordered and for the cluster to be set up and provisioned.
-    
+
     In case you want to setup a standard cluster, then you can find the setup instructions in https://console.bluemix.net/docs/containers/cs_cluster.html#cs_cluster_cli.
 
 2. Verify that the deployment of your worker node is complete.
@@ -124,7 +124,21 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     $ ls
     ```
 
-2. Run the OrientDB Kubernetes configuration script in the cluster. When the deployment and the service are created, OrientDB is available as a service for users.
+2. Setup OrientDB Secrets
+
+  Create a new file called password.txt in the same directory and put your desired OrientDB password inside password.txt (Could be any string with ASCII characters).
+
+  We need to make sure password.txt does not have any trailing newline. Use the following command to remove possible newlines.
+  ```
+  $ tr -d '\n' <password.txt >.strippedpassword.txt && mv .strippedpassword.txt password.txt
+  ```
+
+  Create secret in Kubernetes cluster
+  ```
+  $ kubectl create secret generic mysql-pass --from-file=password.txt
+  ```
+
+3. Run the OrientDB Kubernetes configuration script in the cluster. When the deployment and the service are created, OrientDB is available as a service for users.
     ```
     $ kubectl apply -f local-volumes.yaml
     $ kubectl apply -f orientdb.yaml
