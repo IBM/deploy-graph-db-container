@@ -125,18 +125,18 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     ```
 
 2. Setup OrientDB Secrets
+    
+    Create a new file called password.txt in the same directory and put your desired OrientDB password inside password.txt (Could be any string with ASCII characters).
 
-  Create a new file called password.txt in the same directory and put your desired OrientDB password inside password.txt (Could be any string with ASCII characters).
+    We need to make sure password.txt does not have any trailing newline. Use the following command to remove possible newlines.
+    ```
+    $ tr -d '\n' <password.txt >.strippedpassword.txt && mv .strippedpassword.txt password.txt
+    ```
 
-  We need to make sure password.txt does not have any trailing newline. Use the following command to remove possible newlines.
-  ```
-  $ tr -d '\n' <password.txt >.strippedpassword.txt && mv .strippedpassword.txt password.txt
-  ```
-
-  Create secret in Kubernetes cluster
-  ```
-  $ kubectl create secret generic mysql-pass --from-file=password.txt
-  ```
+    Create secret in Kubernetes cluster
+    ```
+    $ kubectl create secret generic mysql-pass --from-file=password.txt
+    ```
 
 3. Run the OrientDB Kubernetes configuration script in the cluster. When the deployment and the service are created, OrientDB is available as a service for users.
     ```
@@ -144,8 +144,8 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     $ kubectl apply -f orientdb.yaml
     ```
 
-3. Open OrientDB dashboard
-Get information about the service to see which NodePort was assigned.
+4. Open OrientDB dashboard
+    Get information about the service to see which NodePort was assigned.
     ```
     $ kubectl describe service orientdbservice
     ```
@@ -155,7 +155,7 @@ Get information about the service to see which NodePort was assigned.
     ```
     Open a browser and check out the OrientDB dashboard with the following URL: http://&lt;IP_address&gt;:&lt;NodePort&gt;/studio/index.html
 
-4. View a local version of the Kubernetes dashboard.
+5. View a local version of the Kubernetes dashboard.
     Launch your Kubernetes dashboard with the default port 8001.
     ```
     $ kubectl proxy
