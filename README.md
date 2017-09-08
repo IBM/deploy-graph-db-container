@@ -124,7 +124,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     $ ls
     ```
 
-2. Setup OrientDB Secrets
+2. Save desired OrientDB password in Kubernetes secret
     
     Create a new file called password.txt in the same directory and put your desired OrientDB password inside password.txt (Could be any string with ASCII characters).
 
