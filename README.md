@@ -157,7 +157,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     Open a browser and check out the OrientDB dashboard with the following URL.
     ```
     http://<IP_address>:<NodePort>/studio/index.html
-    ```
+    ```    
 
 5. View a local version of the Kubernetes dashboard.
     
@@ -167,6 +167,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     ```
     Open the following URL in a web browser to see the Kubernetes dashboard.
     http://localhost:8001/ui
+    ![alt text](https://github.com/IBM/deploy-graph-db-container/raw/master/images/KubernetesDashboard.png "Kubernetes Dashboard")
 
     In the Workloads tab, you can see the resources that you created. When you are done exploring the Kubernetes dashboard, use CTRL+C to exit the proxy command.
 
