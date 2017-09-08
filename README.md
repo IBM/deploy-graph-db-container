@@ -154,7 +154,10 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     ```
     $ bx cs workers mycluster1
     ```
-    Open a browser and check out the OrientDB dashboard with the following URL: http://&lt;IP_address&gt;:&lt;NodePort&gt;/studio/index.html
+    Open a browser and check out the OrientDB dashboard with the following URL.
+    ```
+    http://<IP_address>:<NodePort>/studio/index.html
+    ```
 
 5. View a local version of the Kubernetes dashboard.
     
