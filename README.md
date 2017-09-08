@@ -133,9 +133,9 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     $ tr -d '\n' <password.txt >.strippedpassword.txt && mv .strippedpassword.txt password.txt
     ```
 
-    Create secret in Kubernetes cluster
+    Put OrientDB password in Kubernetes [secret](https://kubernetes.io/docs/concepts/configuration/secret/)
     ```
-    $ kubectl create secret generic mysql-pass --from-file=password.txt
+    $ kubectl create secret generic orientdb-pass --from-file=password.txt
     ```
 
 3. Run the OrientDB Kubernetes configuration script in the cluster. When the deployment and the service are created, OrientDB is available as a service for users.
