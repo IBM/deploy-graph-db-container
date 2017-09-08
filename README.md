@@ -145,6 +145,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     ```
 
 4. Open OrientDB dashboard
+    
     Get information about the service to see which NodePort was assigned.
     ```
     $ kubectl describe service orientdbservice
@@ -156,6 +157,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     Open a browser and check out the OrientDB dashboard with the following URL: http://&lt;IP_address&gt;:&lt;NodePort&gt;/studio/index.html
 
 5. View a local version of the Kubernetes dashboard.
+    
     Launch your Kubernetes dashboard with the default port 8001.
     ```
     $ kubectl proxy
