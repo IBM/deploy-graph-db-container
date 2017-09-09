@@ -154,6 +154,19 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
 
     In case you are using Bluemix *lite* Kubernetes cluster, where NFS file storage is not supported, you can instead use [hostPath PersistentVolume](https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume). A hostPath PersistentVolume uses a file or directory on the Node to emulate network-attached storage. To create a hostPath PersistentVolume, review `local-volumes.yaml` and run the following command.
     ```
+    $ cat local-volumes.yaml 
+    apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: "pv-volume"
+    spec:
+      capacity:
+        storage: "5Gi"
+      accessModes:
+        - "ReadWriteOnce"
+      hostPath:
+        path: /tmp/data01
+    
     $ kubectl apply -f local-volumes.yaml
     ```
 
