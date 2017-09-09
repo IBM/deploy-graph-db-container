@@ -1,6 +1,6 @@
 # deploy-graph-db-container
 
-## Step 1. Setting up the Bluemix and Kubernetes CLI
+## Prerequisite Step 1. Setting up the Bluemix and Kubernetes CLI
 
 Setup Bluemix and Kubernetes CLI as per instructions in https://console.bluemix.net/docs/containers/cs_tutorials.html#cs_cluster_tutorial. The steps are repeated here for quick reference.
 
@@ -27,7 +27,7 @@ Setup Bluemix and Kubernetes CLI as per instructions in https://console.bluemix.
         $ sudo mv ./kubectl /usr/local/bin/
         ```
 
-## Step 2. Log in to the Bluemix CLI and initialize Bluemix Container Service plugin
+## Prerequisite Step 2. Log in to the Bluemix CLI and initialize Bluemix Container Service plugin
 
 1. Log in to the Bluemix CLI. Enter your Bluemix credentials when prompted.
     ```
@@ -76,7 +76,7 @@ Setup Bluemix and Kubernetes CLI as per instructions in https://console.bluemix.
       $ bx cs init --host https://ap-south.containers.bluemix.net
       ```
 
-## Step 3. Setting up your cluster environment
+## Prerequisite Step 3. Setting up your cluster environment
 
 Bluemix allows you to create a free cluster that comes with 2 CPUs, 4 GB memory, and 1 worker node. This is called _lite cluster_ and allows you to get familiar with and test Kubernetes capabilities. However they lack capabilities like persistent NFS file-based storage with volumes.
 
@@ -112,7 +112,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     $ kubectl version  --short
     ```
 
-## Step 4. Deploying OrientDB service into Kubernetes clusters
+## Step 1. Deploying OrientDB service into Kubernetes clusters
 
 1. Clone or download the OrientDB Kubernetes configuration scripts to your user home directory.
     ```
@@ -218,7 +218,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     In the Workloads tab, you can see the resources that you created. When you are done exploring the Kubernetes dashboard, use CTRL+C to exit the proxy command.
 
 
-## Step 5. Deleting the service when it is no more needed
+## Step 2. Deleting the service when it is no more needed
 
 * In case you want to delete the OrientDB service from your Bluemix Kubernetes cluster, you can run the following command.
     ```
