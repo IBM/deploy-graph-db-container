@@ -158,6 +158,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     ```
     http://<IP_address>:<NodePort>/studio/index.html
     ```    
+    ![alt text](https://github.com/IBM/deploy-graph-db-container/raw/master/images/OrientDB-dashboard.png "OrientDB Dashboard")
 
 5. View a local version of the Kubernetes dashboard.
     
