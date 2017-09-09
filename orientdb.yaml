@@ -44,13 +44,10 @@ spec:
         - containerPort: 2480
           name: port-http
         volumeMounts:
-        - mountPath: /data/orientdb/config
-          name: orientdb-data
-          subPath: config
-        - mountPath: /data/orientdb/databases
+        - mountPath: /orientdb/databases
           name: orientdb-data
           subPath: databases
-        - mountPath: /data/orientdb/backup
+        - mountPath: /orientdb/backup
           name: orientdb-data
           subPath: backup
       volumes:
