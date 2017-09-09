@@ -127,7 +127,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
 2. Save desired OrientDB password in Kubernetes secret
     
     Create a new file called password.txt in the same directory and put your desired OrientDB password inside password.txt (Could be any string with ASCII characters).
-
+ 
     We need to make sure password.txt does not have any trailing newline. Use the following command to remove possible newlines.
     ```
     $ tr -d '\n' <password.txt >.strippedpassword.txt && mv .strippedpassword.txt password.txt
@@ -138,13 +138,27 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     $ kubectl create secret generic orientdb-pass --from-file=password.txt
     ```
 
-3. Run the OrientDB Kubernetes configuration script in the cluster. When the deployment and the service are created, OrientDB is available as a service for users.
+3. Configure persistent storage for OrientDB volumes
+    
+    [OrientDB docker image](https://hub.docker.com/_/orientdb/) expects following directories to be volume mounted so as to persist data across container delete/relaunch.
+    ```
+    /orientdb/databases
+    /orientdb/backup
+    ```
+
+    If you are using Bluemix *standard* Kubernetes cluster, then you can leverage [dynamic volume provisioning](http://blog.kubernetes.io/2016/10/dynamic-provisioning-and-storage-in-kubernetes.html) which allows storage volumes to be created on-demand. To use this feature, update the value of `volume.beta.kubernetes.io/storage-class` annotation in `orientdb.yaml` file to one of the [NFS file-based storage classes supported in Bluemix](https://console.bluemix.net/docs/containers/cs_apps.html#cs_apps_volume_claim): `ibmc-file-bronze` or `ibmc-file-silver` or `ibmc-file-gold`.
+
+    In case you are using Bluemix *lite* Kubernetes cluster, where NFS file storage is not supported, you can instead use [hostPath PersistentVolume](https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume). A hostPath PersistentVolume uses a file or directory on the Node to emulate network-attached storage. To create a hostPath PersistentVolume, review `local-volumes.yaml` and run the following command.
     ```
     $ kubectl apply -f local-volumes.yaml
+    ```
+
+4. Run the OrientDB Kubernetes configuration script in the cluster. When the deployment and the service are created, OrientDB is available as a service for users.
+    ```
     $ kubectl apply -f orientdb.yaml
     ```
 
-4. Open OrientDB dashboard
+5. Open OrientDB dashboard
     
     Get information about the deployed OrientDB service to see which NodePort was assigned for OrientDB's HTTP port 2480.
     ```
@@ -160,7 +174,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     ```    
     ![alt text](https://github.com/IBM/deploy-graph-db-container/raw/master/images/OrientDB-dashboard.png "OrientDB Dashboard")
 
-5. View a local version of the Kubernetes dashboard.
+6. View a local version of the Kubernetes dashboard.
     
     Launch your Kubernetes dashboard with the default port 8001.
     ```
@@ -175,9 +189,13 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
 
 ## Step 5. Deleting the service when it is no more needed
 
-* In case you want to delete the OrientDB service from your Bluemix Kubernetes cluster, then run the following command:
+* In case you want to delete the OrientDB service from your Bluemix Kubernetes cluster, you can run the following command.
     ```
     $ kubectl delete -f orientdb.yaml
+    ```
+* If you are using Bluemix lite Kubernetes cluster, you can delete the local volume by running the following command.
+    ```
+    $ kubectl delete -f local-volumes.yaml
     ```
 
 ***References***
