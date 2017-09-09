@@ -146,7 +146,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
 
 4. Open OrientDB dashboard
     
-    Get information about the service to see which NodePort was assigned.
+    Get information about the deployed OrientDB service to see which NodePort was assigned for OrientDB's HTTP port 2480.
     ```
     $ kubectl describe service orientdbservice
     ```
@@ -156,7 +156,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     ```
     Open a browser and check out the OrientDB dashboard with the following URL.
     ```
-    http://<IP_address>:<NodePort>/studio/index.html
+    http://<IP_address>:<HTTP_NodePort>/studio/index.html
     ```    
     ![alt text](https://github.com/IBM/deploy-graph-db-container/raw/master/images/OrientDB-dashboard.png "OrientDB Dashboard")
 
