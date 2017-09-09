@@ -39,8 +39,10 @@ spec:
               name: orientdb-pass
               key: password.txt
         ports:
+        - containerPort: 2424
+          name: port-binary
         - containerPort: 2480
-          name: orientdb
+          name: port-http
         volumeMounts:
         - mountPath: /data/orientdb/config
           name: orientdb-data
@@ -69,6 +71,9 @@ spec:
     service: orientdb
     type: container-deployment
   ports:
+  - protocol: TCP
+    port: 2424
+    name: binary
   - protocol: TCP
     port: 2480
     name: http
