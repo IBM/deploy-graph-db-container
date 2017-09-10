@@ -190,7 +190,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     $ kubectl apply -f orientdb.yaml
     ```
 
-    The `orientdb.yaml` script creates a Kubernetes deployment for [OrientDB container](https://hub.docker.com/_/orientdb/). The OrientDB password is fetched from the Kubernetes secret created in Step 2 above. Similarly the persistent volumes configured in Step 3 above are used for the persistent storage for OrientDB volumes. The corresponding snippet from `orientdb.yaml` script is shown below.
+    The `orientdb.yaml` script creates a Kubernetes deployment for [OrientDB container](https://hub.docker.com/_/orientdb/). The OrientDB password is fetched from the Kubernetes secret created in Step 1.2 above. Similarly the persistent volumes configured in Step 1.3 above are used as the persistent storage for OrientDB volumes. The corresponding snippet from `orientdb.yaml` script is shown below.
     ```
     kind: Deployment
     apiVersion: extensions/v1beta1
@@ -235,7 +235,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     ```
     If you are using Bluemix *standard* Kubernetes cluster, then it is recommended that you increase the number of replicas to 3 or more. You can also spread deployment pods across multiple nodes (anti-affinity) as per instructions in https://console.bluemix.net/docs/containers/cs_planning.html#highly_available_apps
     
-    `orientdb.yaml` script also exposes OrientDB ports (HTTP: 2480 and binary: 2424) to the internet by creating a Kubernetes service of type NodePort as shown in the snippet below.
+    The `orientdb.yaml` script also exposes OrientDB ports (HTTP: 2480 and binary: 2424) to the internet by creating a Kubernetes service of type NodePort as shown in the snippet below.
     ```
     kind: Service
     apiVersion: v1
