@@ -185,8 +185,77 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     ```
 
 4. Run the OrientDB Kubernetes configuration script in the cluster. When the deployment and the service are created, OrientDB is available as a service for users.
+
     ```
     $ kubectl apply -f orientdb.yaml
+    ```
+
+    The `orientdb.yaml` script creates a Kubernetes deployment for [OrientDB container](https://hub.docker.com/_/orientdb/). The OrientDB password is fetched from the Kubernetes secret created in Step 2 above. Similarly the persistent volumes configured in Step 3 above are used for the persistent storage for OrientDB volumes. The corresponding snippet from `orientdb.yaml` script is shown below.
+    ```
+    kind: Deployment
+    apiVersion: extensions/v1beta1
+    metadata:
+      name: orientdbservice
+      labels:
+        service: orientdb
+    spec:
+      replicas: 1
+      template:
+        metadata:
+          name: orientdbservice
+          labels:
+            service: orientdb
+            type: container-deployment
+        spec:
+          containers:
+          - name: orientdbservice
+            image: orientdb:2.2.26
+            env:
+            - name: ORIENTDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: orientdb-pass
+                  key: password.txt
+            ports:
+            - containerPort: 2424
+              name: port-binary
+            - containerPort: 2480
+              name: port-http
+            volumeMounts:
+            - mountPath: /orientdb/databases
+              name: orientdb-data
+              subPath: databases
+            - mountPath: /orientdb/backup
+              name: orientdb-data
+              subPath: backup
+          volumes:
+          - name: orientdb-data
+            persistentVolumeClaim:
+              claimName: orientdb-pv-claim
+    ```
+    If you are using Bluemix *standard* Kubernetes cluster, then it is recommended that you increase the number of replicas to 3 or more. You can also spread deployment pods across multiple nodes (anti-affinity) as per instructions in https://console.bluemix.net/docs/containers/cs_planning.html#highly_available_apps
+    
+    `orientdb.yaml` script also exposes OrientDB ports (HTTP: 2480 and binary: 2424) to the internet by creating a Kubernetes service of type NodePort as shown in the snippet below.
+    ```
+    kind: Service
+    apiVersion: v1
+    metadata:
+      name: orientdbservice
+      labels:
+        service: orientdb
+        type: nodeport-service
+    spec:
+      type: NodePort
+      selector:
+        service: orientdb
+        type: container-deployment
+      ports:
+      - protocol: TCP
+        port: 2424
+        name: binary
+      - protocol: TCP
+        port: 2480
+        name: http
     ```
 
 5. Open OrientDB dashboard
