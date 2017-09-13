@@ -304,24 +304,27 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     * In the login screen of OrientDB dashboard, select *MovieRatings* under *Database* and specify username (root) and password.
     * Click *Connect*.
   * Click on Schema.
-    * Under Vertex Classes, you can see following classes:
-      Movies, Users, Genres, Occupation
-    * Under Edge Classes, you can see following classes:
-      rated, hasGenera, hasOccupation
+    * Under Vertex Classes, you can see following classes: `Movies, Users, Genres, Occupation`
+    * Under Edge Classes, you can see following classes: `rated, hasGenera, hasOccupation`
     * Click on any of the Vertext/Edge classes, like Movies, to see its properties.
   * Click on Browse
     * Run following query:
-	  ```
+      ```
       select from Movies
       ```
-      The first 10 vertices of *Movies* class (ordered by id) will be shown along with its properties and incoming and outgoing edges.
+      The first 10 vertices of *Movies* class (ordered by *id*) will be shown along with its properties and, incoming and outgoing edges.
   * Click on Graph
     * Run following query:
       ```
       select from users where id = 1
       ```
-    * Click on the #16:0 vertex, In the ring that pops up, select outgoing edges, and click on *rated*
-      All the movies rated by this user will be shown. Click on any of the movie vertices, under Settings, change Display to *title*. Each of the movie vertices will now show the movie title as shown in the snapshot below.
+    * Click on the *User* vertex at the center. In the ring that pops up, select outgoing edges, and click on *rated*.
+      
+      All the movies rated by this user will be shown.
+    
+    * Click on any of the movie vertices. Under *Settings*, next to *Display*, select *title*.
+      
+      This will show the movie title below each of the *Movie* vertices as shown in the snapshot below.
       ![alt text](https://github.com/IBM/deploy-graph-db-container/raw/master/images/OrientDB-GraphEditor.png "OrientDB Graph Editor")
 
 3. Open Gremlin console and run queries
