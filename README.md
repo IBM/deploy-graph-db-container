@@ -286,8 +286,61 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
 
     In the Workloads tab, you can see the resources that you created. When you are done exploring the Kubernetes dashboard, use CTRL+C to exit the proxy command.
 
+## Step 2. Import a public database and explore it using OrientDB Dashboard and Gremlin console
 
-## Step 2. Deleting the service when it is no more needed
+1. Import a public database
+
+  * In the OrientDB dashboard, click on the cloud import button (next to *New DB*).
+  * Specify username (root) and password (same as the value specified in password.txt).
+  * Scroll down to *MovieRatings* database and click on import button.
+    
+    This will import a database containing Movies classified by Genre and Ratings by Users, created by MovieLens (movielens.org).
+    
+    Once import is successful, you will be taken back to login screen.
+
+2. Explore schema and data (vertices/edges)
+
+  * Log in to *MovieRatings* database
+    * In the login screen of OrientDB dashboard, select *MovieRatings* under *Database* and specify username (root) and password.
+    * Click *Connect*.
+  * Click on Schema.
+    * Under Vertex Classes, you can see following classes:
+      Movies, Users, Genres, Occupation
+    * Under Edge Classes, you can see following classes:
+      rated, hasGenera, hasOccupation
+    * Click on any of the Vertext/Edge classes, like Movies, to see its properties.
+  * Click on Browse
+    * Run following query:
+	  ```
+      select from Movies
+      ```
+      The first 10 vertices of *Movies* class (ordered by id) will be shown along with its properties and incoming and outgoing edges.
+  * Click on Graph
+    * Run following query:
+      ```
+      select from users where id = 1
+      ```
+    * Click on the #16:0 vertex, In the ring that pops up, select outgoing edges, and click on *rated*
+      All the movies rated by this user will be shown. Click on any of the movie vertices, under Settings, change Display to *title*. Each of the movie vertices will now show the movie title as shown in the snapshot below.
+      ![alt text](https://github.com/IBM/deploy-graph-db-container/raw/master/images/OrientDB-GraphEditor.png "OrientDB Graph Editor")
+
+3. Open Gremlin console and run queries
+
+    Kubernetes allows us to [get a shell to a running container](https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/). We can use this feature to open [OrientDB's Gremlin console](https://orientdb.com/docs/2.2/Gremlin.html) as shown below.
+    ```
+    $ kubectl get pods
+    NAME                               READY     STATUS    RESTARTS   AGE
+    orientdbservice-2043245721-81524   1/1       Running   0          2d
+    $ kubectl exec -it orientdbservice-2043245721-81524  -- /orientdb/bin/gremlin.sh
+
+             \,,,/
+             (o o)
+    -----oOOo-(_)-oOOo-----
+    gremlin>
+    ```
+    Note: Replace the name after `kubectl exec -it` with the name of the pod on which OrientDB is running as obtained by `kubectl get pods` command.
+
+## Step 3. Deleting the service when it is no more needed
 
 * In case you want to delete the OrientDB service from your Bluemix Kubernetes cluster, you can run the following command.
     ```
