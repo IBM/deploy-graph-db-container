@@ -186,7 +186,7 @@ spec:
   annotations:
 ```
 
-In case you are using Bluemix *lite* Kubernetes cluster, where NFS file storage is not supported, you can instead use [hostPath PersistentVolume](https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume). A hostPath PersistentVolume uses a file or directory on the Node to emulate network-attached storage. To create a hostPath PersistentVolume, review `local-volumes.yaml` and run `kubectl apply` command.
+In case you are using Bluemix *lite* Kubernetes cluster, where NFS file storage is not supported, you can instead use [hostPath PersistentVolume](https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume). A hostPath PersistentVolume uses a file or directory on the Node to emulate network-attached storage. To create a hostPath PersistentVolume, review [local-volumes.yaml](local-volumes.yaml) and run `kubectl apply` command.
 ```
 $ cat local-volumes.yaml 
 apiVersion: v1
@@ -210,7 +210,7 @@ Run the OrientDB Kubernetes configuration script in the cluster. When the deploy
 $ kubectl apply -f orientdb.yaml
 ```
 
-The `orientdb.yaml` script creates a Kubernetes deployment for [OrientDB container](https://hub.docker.com/_/orientdb/). The OrientDB password is fetched from the Kubernetes secret created in Step 1.2 above. Similarly the persistent volumes configured in Step 1.3 above are used as the persistent storage for OrientDB volumes. The corresponding snippet from `orientdb.yaml` script is shown below.
+The [orientdb.yaml](orientdb.yaml) script creates a Kubernetes deployment for [OrientDB container](https://hub.docker.com/_/orientdb/). The OrientDB password is fetched from the Kubernetes secret created in Step 1.2 above. Similarly the persistent volumes configured in Step 1.3 above are used as the persistent storage for OrientDB volumes. The corresponding snippet from [orientdb.yaml](orientdb.yaml) script is shown below.
 ```
 kind: Deployment
 apiVersion: extensions/v1beta1
@@ -256,7 +256,7 @@ spec:
 
 If you are using Bluemix *standard* Kubernetes cluster, then it is recommended that you increase the number of replicas to 3 or more. You can also spread deployment pods across multiple nodes (anti-affinity) as per instructions in https://console.bluemix.net/docs/containers/cs_planning.html#highly_available_apps
     
-The `orientdb.yaml` script also exposes OrientDB ports (HTTP: 2480 and binary: 2424) to the internet by creating a Kubernetes service of type NodePort as shown in the snippet below.
+The [orientdb.yaml](orientdb.yaml) script also exposes OrientDB ports (HTTP: 2480 and binary: 2424) to the internet by creating a Kubernetes service of type NodePort as shown in the snippet below.
 ```
 kind: Service
 apiVersion: v1
@@ -294,7 +294,7 @@ Open a browser and check out the OrientDB dashboard with the following URL.
 ```
 http://<IP_address>:<HTTP_NodePort>/studio/index.html
 ```    
-![alt text](https://github.com/IBM/deploy-graph-db-container/raw/master/images/OrientDB-dashboard.png "OrientDB Dashboard")
+![alt text](images/OrientDB-dashboard.png "OrientDB Dashboard")
 
 ### 1.6 View a local version of the Kubernetes dashboard.  
 Launch your Kubernetes dashboard with the default port 8001.
@@ -304,7 +304,7 @@ $ kubectl proxy
 
 Open the following URL in a web browser to see the Kubernetes dashboard.
 http://localhost:8001/ui
-![alt text](https://github.com/IBM/deploy-graph-db-container/raw/master/images/KubernetesDashboard.png "Kubernetes Dashboard")
+![alt text](images/KubernetesDashboard.png "Kubernetes Dashboard")
 
 In the Workloads tab, you can see the resources that you created. When you are done exploring the Kubernetes dashboard, use CTRL+C to exit the proxy command.
 
@@ -347,7 +347,7 @@ In the Workloads tab, you can see the resources that you created. When you are d
     * Click on any of the movie vertices. Under *Settings*, next to *Display*, select *title*.
       
       This will show the movie title below each of the *Movie* vertices as shown in the snapshot below.
-      ![alt text](https://github.com/IBM/deploy-graph-db-container/raw/master/images/OrientDB-GraphEditor.png "OrientDB Graph Editor")
+      ![alt text](images/OrientDB-GraphEditor.png "OrientDB Graph Editor")
 
 ### 2.3 Open Gremlin/OrientDB console and run queries
 
