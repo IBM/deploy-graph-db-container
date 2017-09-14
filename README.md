@@ -1,4 +1,24 @@
-# deploy-graph-db-container
+# Deploy OrientDB container on Bluemix Kubernetes
+
+## Prerequisite steps
+1. [Set up the Bluemix and Kubernetes CLI](#prerequisite-step-1-setting-up-the-bluemix-and-kubernetes-cli)
+2. [Log in to the Bluemix CLI and initialize Bluemix Container Service plugin](#prerequisite-step-2-log-in-to-the-bluemix-cli-and-initialize-bluemix-container-service-plugin)
+3. [Set up your Bluemix Kubernetes cluster environment](#prerequisite-step-3-setting-up-your-cluster-environment)
+
+## Steps
+1. [Deploy OrientDB service into Kubernetes clusters](#step-1-deploying-orientdb-service-into-kubernetes-clusters)
+  - 1.1 [Copy OrientDB Kubernetes configuration scripts](#11-copy-orientdb-kubernetes-configuration-scripts)
+  - 1.2 [Save desired OrientDB password in Kubernetes secret](#12-save-desired-orientdb-password-in-kubernetes-secret)
+  - 1.3 [Configure persistent storage for OrientDB volumes](#13-configure-persistent-storage-for-orientdb-volumes)
+  - 1.4 [Deploy OrientDB into Kubernetes cluster](#14-deploy-orientdb-into-kubernetes-cluster)
+  - 1.5 [Open OrientDB dashboard](#15-open-orientdb-dashboard)
+  - 1.6 [View a local version of the Kubernetes dashboard](#16-view-a-local-version-of-the-kubernetes-dashboard)
+2. [Import a public database and explore it using OrientDB Dashboard and Gremlin console](#step-2-import-a-public-database-and-explore-it-using-orientdb-dashboard-and-gremlin-console)
+  - 2.1 [Import a public database](#21-import-a-public-database)
+  - 2.2 [Explore schema and data (vertices/edges) using OrientDB dashboard](#22-explore-schema-and-data-verticesedges-using-orientdb-dashboard)
+  - 2.3 [Open Gremlin/OrientDB console and run queries](#23-open-gremlinorientdb-console-and-run-queries)
+
+[Troubleshooting](#troubleshooting)
 
 ## Prerequisite Step 1. Setting up the Bluemix and Kubernetes CLI
 
