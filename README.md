@@ -114,181 +114,183 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
 
 ## Step 1. Deploying OrientDB service into Kubernetes clusters
 
-1. Clone or download the OrientDB Kubernetes configuration scripts to your user home directory.
-    ```
-    $ git clone https://github.com/IBM/deploy-graph-db-container.git
-    ```
-    Navigate to the source directory
-    ```
-    $ cd deploy-graph-db-container
-    $ ls
-    ```
+### 1.1 Copy OrientDB Kubernetes configuration scripts
+Clone or download the OrientDB Kubernetes configuration scripts to your user home directory.
+```
+$ git clone https://github.com/IBM/deploy-graph-db-container.git
+```
 
-2. Save desired OrientDB password in Kubernetes secret
-    
-    Create a new file called password.txt in the same directory and put your desired OrientDB password inside password.txt (Could be any string with ASCII characters).
+Navigate to the source directory
+```
+$ cd deploy-graph-db-container
+$ ls
+```
+
+### 1.2 Save desired OrientDB password in Kubernetes secret
+Create a new file called password.txt in the same directory and put your desired OrientDB password inside password.txt (Could be any string with ASCII characters).
  
-    We need to make sure password.txt does not have any trailing newline. Use the following command to remove possible newlines.
-    ```
-    $ tr -d '\n' <password.txt >.strippedpassword.txt && mv .strippedpassword.txt password.txt
-    ```
+We need to make sure password.txt does not have any trailing newline. Use the following command to remove possible newlines.
+```
+$ tr -d '\n' <password.txt >.strippedpassword.txt && mv .strippedpassword.txt password.txt
+```
 
-    Put OrientDB password in Kubernetes [secret](https://kubernetes.io/docs/concepts/configuration/secret/)
-    ```
-    $ kubectl create secret generic orientdb-pass --from-file=password.txt
-    ```
+Put OrientDB password in Kubernetes [secret](https://kubernetes.io/docs/concepts/configuration/secret/)
+```
+$ kubectl create secret generic orientdb-pass --from-file=password.txt
+```
 
-3. Configure persistent storage for OrientDB volumes
-    
-    [OrientDB docker image](https://hub.docker.com/_/orientdb/) requires following directories to be volume mounted so as to persist data across container delete/relaunch.
-    ```
-    /orientdb/databases
-    /orientdb/backup
-    ```
+### 1.3 Configure persistent storage for OrientDB volumes    
+[OrientDB docker image](https://hub.docker.com/_/orientdb/) requires following directories to be volume mounted so as to persist data across container delete/relaunch.
+```
+/orientdb/databases
+/orientdb/backup
+```
 
-    If you are using Bluemix *standard* Kubernetes cluster, then you can leverage [dynamic volume provisioning](http://blog.kubernetes.io/2016/10/dynamic-provisioning-and-storage-in-kubernetes.html) which allows storage volumes to be created on-demand. To use this feature, update the value of `volume.beta.kubernetes.io/storage-class` annotation in `orientdb.yaml` to one of the [NFS file-based storage classes supported in Bluemix](https://console.bluemix.net/docs/containers/cs_apps.html#cs_apps_volume_claim): `ibmc-file-bronze` or `ibmc-file-silver` or `ibmc-file-gold`. Also change `accessModes` to `ReadWriteMany` and increase storage request to say 20GB.
-    ```
-    kind: PersistentVolumeClaim
-    apiVersion: v1
-    metadata:
-      name: orientdb-pv-claim
-      labels:
-        service: orientdb
-        type: pv-claim
-      annotations:
-        volume.beta.kubernetes.io/storage-class: "ibmc-file-gold"
-    spec:
-      accessModes:
-      - ReadWriteMany
-      resources:
-        requests:
-          storage: 20Gi
-      annotations:
-    ```
+If you are using Bluemix *standard* Kubernetes cluster, then you can leverage [dynamic volume provisioning](http://blog.kubernetes.io/2016/10/dynamic-provisioning-and-storage-in-kubernetes.html) which allows storage volumes to be created on-demand. To use this feature, update the value of `volume.beta.kubernetes.io/storage-class` annotation in `orientdb.yaml` to one of the [NFS file-based storage classes supported in Bluemix](https://console.bluemix.net/docs/containers/cs_apps.html#cs_apps_volume_claim): `ibmc-file-bronze` or `ibmc-file-silver` or `ibmc-file-gold`. Also change `accessModes` to `ReadWriteMany` and increase storage request to say 20GB.
+```
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: orientdb-pv-claim
+  labels:
+    service: orientdb
+    type: pv-claim
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "ibmc-file-gold"
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+  annotations:
+```
 
-    In case you are using Bluemix *lite* Kubernetes cluster, where NFS file storage is not supported, you can instead use [hostPath PersistentVolume](https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume). A hostPath PersistentVolume uses a file or directory on the Node to emulate network-attached storage. To create a hostPath PersistentVolume, review `local-volumes.yaml` and run `kubectl apply` command.
-    ```
-    $ cat local-volumes.yaml 
-    apiVersion: v1
-    kind: PersistentVolume
-    metadata:
-      name: "pv-volume"
-    spec:
-      capacity:
-        storage: "5Gi"
-      accessModes:
-        - "ReadWriteOnce"
-      hostPath:
-        path: /tmp/data01
-    
-    $ kubectl apply -f local-volumes.yaml
-    ```
+In case you are using Bluemix *lite* Kubernetes cluster, where NFS file storage is not supported, you can instead use [hostPath PersistentVolume](https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume). A hostPath PersistentVolume uses a file or directory on the Node to emulate network-attached storage. To create a hostPath PersistentVolume, review `local-volumes.yaml` and run `kubectl apply` command.
+```
+$ cat local-volumes.yaml 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: "pv-volume"
+spec:
+  capacity:
+    storage: "5Gi"
+  accessModes:
+    - "ReadWriteOnce"
+  hostPath:
+    path: /tmp/data01
 
-4. Run the OrientDB Kubernetes configuration script in the cluster. When the deployment and the service are created, OrientDB is available as a service for users.
+$ kubectl apply -f local-volumes.yaml
+```
 
-    ```
-    $ kubectl apply -f orientdb.yaml
-    ```
+### 1.4 Deploy OrientDB into Kubernetes cluster
+Run the OrientDB Kubernetes configuration script in the cluster. When the deployment and the service are created, OrientDB is available as a service for users.
+```
+$ kubectl apply -f orientdb.yaml
+```
 
-    The `orientdb.yaml` script creates a Kubernetes deployment for [OrientDB container](https://hub.docker.com/_/orientdb/). The OrientDB password is fetched from the Kubernetes secret created in Step 1.2 above. Similarly the persistent volumes configured in Step 1.3 above are used as the persistent storage for OrientDB volumes. The corresponding snippet from `orientdb.yaml` script is shown below.
-    ```
-    kind: Deployment
-    apiVersion: extensions/v1beta1
-    metadata:
-      name: orientdbservice
-      labels:
-        service: orientdb
-    spec:
-      replicas: 1
-      template:
-        metadata:
-          name: orientdbservice
-          labels:
-            service: orientdb
-            type: container-deployment
-        spec:
-          containers:
-          - name: orientdbservice
-            image: orientdb:2.2.26
-            env:
-            - name: ORIENTDB_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: orientdb-pass
-                  key: password.txt
-            ports:
-            - containerPort: 2424
-              name: port-binary
-            - containerPort: 2480
-              name: port-http
-            volumeMounts:
-            - mountPath: /orientdb/databases
-              name: orientdb-data
-              subPath: databases
-            - mountPath: /orientdb/backup
-              name: orientdb-data
-              subPath: backup
-          volumes:
-          - name: orientdb-data
-            persistentVolumeClaim:
-              claimName: orientdb-pv-claim
-    ```
-    If you are using Bluemix *standard* Kubernetes cluster, then it is recommended that you increase the number of replicas to 3 or more. You can also spread deployment pods across multiple nodes (anti-affinity) as per instructions in https://console.bluemix.net/docs/containers/cs_planning.html#highly_available_apps
-    
-    The `orientdb.yaml` script also exposes OrientDB ports (HTTP: 2480 and binary: 2424) to the internet by creating a Kubernetes service of type NodePort as shown in the snippet below.
-    ```
-    kind: Service
-    apiVersion: v1
+The `orientdb.yaml` script creates a Kubernetes deployment for [OrientDB container](https://hub.docker.com/_/orientdb/). The OrientDB password is fetched from the Kubernetes secret created in Step 1.2 above. Similarly the persistent volumes configured in Step 1.3 above are used as the persistent storage for OrientDB volumes. The corresponding snippet from `orientdb.yaml` script is shown below.
+```
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: orientdbservice
+  labels:
+    service: orientdb
+spec:
+  replicas: 1
+  template:
     metadata:
       name: orientdbservice
       labels:
-        service: orientdb
-        type: nodeport-service
-    spec:
-      type: NodePort
-      selector:
         service: orientdb
         type: container-deployment
-      ports:
-      - protocol: TCP
-        port: 2424
-        name: binary
-      - protocol: TCP
-        port: 2480
-        name: http
-    ```
+    spec:
+      containers:
+      - name: orientdbservice
+        image: orientdb:2.2.26
+        env:
+        - name: ORIENTDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: orientdb-pass
+              key: password.txt
+        ports:
+        - containerPort: 2424
+          name: port-binary
+        - containerPort: 2480
+          name: port-http
+        volumeMounts:
+        - mountPath: /orientdb/databases
+          name: orientdb-data
+          subPath: databases
+        - mountPath: /orientdb/backup
+          name: orientdb-data
+          subPath: backup
+      volumes:
+      - name: orientdb-data
+        persistentVolumeClaim:
+          claimName: orientdb-pv-claim
+```
 
-5. Open OrientDB dashboard
+If you are using Bluemix *standard* Kubernetes cluster, then it is recommended that you increase the number of replicas to 3 or more. You can also spread deployment pods across multiple nodes (anti-affinity) as per instructions in https://console.bluemix.net/docs/containers/cs_planning.html#highly_available_apps
     
-    Get information about the deployed OrientDB service to see which NodePort was assigned for OrientDB's HTTP port 2480.
-    ```
-    $ kubectl describe service orientdbservice
-    ```
-    Get the public IP address for the worker node in the cluster.
-    ```
-    $ bx cs workers mycluster1
-    ```
-    Open a browser and check out the OrientDB dashboard with the following URL.
-    ```
-    http://<IP_address>:<HTTP_NodePort>/studio/index.html
-    ```    
-    ![alt text](https://github.com/IBM/deploy-graph-db-container/raw/master/images/OrientDB-dashboard.png "OrientDB Dashboard")
+The `orientdb.yaml` script also exposes OrientDB ports (HTTP: 2480 and binary: 2424) to the internet by creating a Kubernetes service of type NodePort as shown in the snippet below.
+```
+kind: Service
+apiVersion: v1
+metadata:
+  name: orientdbservice
+  labels:
+    service: orientdb
+    type: nodeport-service
+spec:
+  type: NodePort
+  selector:
+    service: orientdb
+    type: container-deployment
+  ports:
+  - protocol: TCP
+    port: 2424
+    name: binary
+  - protocol: TCP
+    port: 2480
+    name: http
+```
 
-6. View a local version of the Kubernetes dashboard.
-    
-    Launch your Kubernetes dashboard with the default port 8001.
-    ```
-    $ kubectl proxy
-    ```
-    Open the following URL in a web browser to see the Kubernetes dashboard.
-    http://localhost:8001/ui
-    ![alt text](https://github.com/IBM/deploy-graph-db-container/raw/master/images/KubernetesDashboard.png "Kubernetes Dashboard")
+### 1.5 Open OrientDB dashboard
+Get information about the deployed OrientDB service to see which NodePort was assigned for OrientDB's HTTP port 2480.
+```
+$ kubectl describe service orientdbservice
+```
 
-    In the Workloads tab, you can see the resources that you created. When you are done exploring the Kubernetes dashboard, use CTRL+C to exit the proxy command.
+Get the public IP address for the worker node in the cluster.
+```
+$ bx cs workers mycluster1
+```
+
+Open a browser and check out the OrientDB dashboard with the following URL.
+```
+http://<IP_address>:<HTTP_NodePort>/studio/index.html
+```    
+![alt text](https://github.com/IBM/deploy-graph-db-container/raw/master/images/OrientDB-dashboard.png "OrientDB Dashboard")
+
+### 1.6 View a local version of the Kubernetes dashboard.  
+Launch your Kubernetes dashboard with the default port 8001.
+```
+$ kubectl proxy
+```
+
+Open the following URL in a web browser to see the Kubernetes dashboard.
+http://localhost:8001/ui
+![alt text](https://github.com/IBM/deploy-graph-db-container/raw/master/images/KubernetesDashboard.png "Kubernetes Dashboard")
+
+In the Workloads tab, you can see the resources that you created. When you are done exploring the Kubernetes dashboard, use CTRL+C to exit the proxy command.
 
 ## Step 2. Import a public database and explore it using OrientDB Dashboard and Gremlin console
 
-1. Import a public database
+### 2.1 Import a public database
 
   * In the OrientDB dashboard, click on the cloud import button (next to *New DB*).
   * Specify username (root) and password (same as the value specified in password.txt).
@@ -298,7 +300,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     
     Once import is successful, you will be taken back to login screen.
 
-2. Explore schema and data (vertices/edges) using OrientDB dashboard
+### 2.2 Explore schema and data (vertices/edges) using OrientDB dashboard
 
   * Log in to *MovieRatings* database
     * In the login screen of OrientDB dashboard, select *MovieRatings* under *Database* and specify username (root) and password.
@@ -327,7 +329,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
       This will show the movie title below each of the *Movie* vertices as shown in the snapshot below.
       ![alt text](https://github.com/IBM/deploy-graph-db-container/raw/master/images/OrientDB-GraphEditor.png "OrientDB Graph Editor")
 
-3. Open Gremlin/OrientDB console and run queries
+### 2.3 Open Gremlin/OrientDB console and run queries
 
   * Kubernetes allows us to [get a shell to a running container](https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/). We can use this feature to open [OrientDB's Gremlin console](https://orientdb.com/docs/2.2/Gremlin.html) as shown below.
     ```
@@ -408,19 +410,31 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     
     The [OrientDB select query](http://orientdb.com/docs/2.2.x/SQL-Query.html) that was run above displays the movies rated by a specified user (with id = 1).
 
-## Step 3. Deleting the service when it is no more needed
+# Troubleshooting
 
-* In case you want to delete the OrientDB service from your Bluemix Kubernetes cluster, you can run the following command.
+* If you want to delete the OrientDB service from your Bluemix Kubernetes cluster, you can run the following command.
     ```
     $ kubectl delete -f orientdb.yaml
     ```
-* If you are using Bluemix lite Kubernetes cluster, you can delete the local volume by running the following command.
+* If you want to delete your local persistent volume, you can run the following command.
     ```
     $ kubectl delete -f local-volumes.yaml
     ```
+* If you want to delete the Kubernetes sceret containing OrientDB password, you can run the following command.
+    ```
+    $ kubectl delete secret orientdb-pass
+    ```
+* For debugging purposes, if you want to inspect the logs of OrientDB service, you can run the following command.
+    ```
+    $ kubectl get pods # Get the name of the OrientDB pod
+    $ kubectl logs [OrientDB pod name]
+    ```
 
-***References***
+# References
 * Persistent data storage options in Bluemix Kubernetes Clusters
 https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning_apps_storage
 * https://kubernetes.io/docs/concepts/storage/volumes/
 * https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+
+# License
+[Apache 2.0](LICENSE)
