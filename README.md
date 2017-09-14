@@ -405,7 +405,8 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     $ 
     ```
     Note: Replace the name after `kubectl exec -it` with the name of the pod on which OrientDB is running as obtained by `kubectl get pods` command.
-    The [OrientDB select query](http://orientdb.com/docs/2.2.x/SQL-Query.html) ran above displays the movies rated by a particular user (with id 1)
+    
+    The [OrientDB select query](http://orientdb.com/docs/2.2.x/SQL-Query.html) ran above displays the movies rated by a specified user (with id = 1).
 
 ## Step 3. Deleting the service when it is no more needed
 
