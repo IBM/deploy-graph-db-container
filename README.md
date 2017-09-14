@@ -327,9 +327,9 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
       This will show the movie title below each of the *Movie* vertices as shown in the snapshot below.
       ![alt text](https://github.com/IBM/deploy-graph-db-container/raw/master/images/OrientDB-GraphEditor.png "OrientDB Graph Editor")
 
-3. Open Gremlin console and run queries
+3. Open Gremlin/OrientDB console and run queries
 
-    Kubernetes allows us to [get a shell to a running container](https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/). We can use this feature to open [OrientDB's Gremlin console](https://orientdb.com/docs/2.2/Gremlin.html) as shown below.
+  * Kubernetes allows us to [get a shell to a running container](https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/). We can use this feature to open [OrientDB's Gremlin console](https://orientdb.com/docs/2.2/Gremlin.html) as shown below.
     ```
     $ kubectl get pods
     NAME                               READY     STATUS    RESTARTS   AGE
@@ -340,6 +340,69 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
              (o o)
     -----oOOo-(_)-oOOo-----
     gremlin>
+    ```
+    Note: Replace the name after `kubectl exec -it` with the name of the pod on which OrientDB is running as obtained by `kubectl get pods` command.
+
+  * As an illustration, from within Gremlin console, we will connect to *MovieRatings* database and display the movies rated by a particular user (say with record id `#16:0`)
+    ```
+    gremlin> g = new OrientGraph("remote:localhost/MovieRatings");
+    ==>orientgraph[remote:localhost/MovieRatings]
+    gremlin> g.v('#16:0').outE('rated').inV().title
+    ==>One Flew Over the Cuckoo's Nest (1975)
+    ==>James and the Giant Peach (1996)
+    ==>My Fair Lady (1964)
+    ==>Erin Brockovich (2000)
+    ==>Bug's Life, A (1998)
+    ==>Princess Bride, The (1987)
+    ==>Ben-Hur (1959)
+    ==>Christmas Story, A (1983)
+    ...
+    gremlin> exit
+    ```
+
+  * We can similarly open OrientDB console and run [OrientDB commands](http://orientdb.com/docs/2.2.x/Console-Commands.html) as shown below.
+    ```
+    $ kubectl exec -it orientdbservice-2043245721-81524  -- /orientdb/bin/console.sh
+
+    OrientDB console v.2.2.26 (build ae9fcb9c075e1d74560a336a96b57d3661234c7b) https://www.orientdb.com
+    Type 'help' to display all the supported commands.
+    Installing extensions for GREMLIN language v.2.6.0
+
+    orientdb> CONNECT remote:localhost/MovieRatings root
+    Enter password: 
+
+    Connecting to database [remote:localhost/MovieRatings] with user 'root'...OK
+    orientdb {db=MovieRatings}> select OUT("rated").title as MovieRated from Users where id = 1 UNWIND MovieRated;
+
+    +----+--------------------------------------+
+    |#   |MovieRated                            |
+    +----+--------------------------------------+
+    |0   |One Flew Over the Cuckoo's Nest (1975)|
+    |1   |James and the Giant Peach (1996)      |
+    |2   |My Fair Lady (1964)                   |
+    |3   |Erin Brockovich (2000)                |
+    |4   |Bug's Life, A (1998)                  |
+    |5   |Princess Bride, The (1987)            |
+    |6   |Ben-Hur (1959)                        |
+    |7   |Christmas Story, A (1983)             |
+    |8   |Snow White and the Seven Dwarfs (1937)|
+    |9   |Wizard of Oz, The (1939)              |
+    |10  |Beauty and the Beast (1991)           |
+    |11  |Gigi (1958)                           |
+    |12  |Miracle on 34th Street (1947)         |
+    |13  |Ferris Bueller's Day Off (1986)       |
+    |14  |Sound of Music, The (1965)            |
+    |15  |Airplane! (1980)                      |
+    |16  |Tarzan (1999)                         |
+    |17  |Bambi (1942)                          |
+    |18  |Awakenings (1990)                     |
+    |19  |Big (1988)                            |
+    +----+--------------------------------------+
+    LIMIT EXCEEDED: resultset contains more items not displayed (limit=20)
+
+    20 item(s) found. Query executed in 0.013 sec(s).
+    orientdb {db=MovieRatings}> quit
+    $ 
     ```
     Note: Replace the name after `kubectl exec -it` with the name of the pod on which OrientDB is running as obtained by `kubectl get pods` command.
 
