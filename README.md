@@ -1,12 +1,12 @@
 # Deploy OrientDB container on Bluemix Kubernetes
 
 ## Prerequisite steps
-1. [Set up the Bluemix and Kubernetes CLI](#prerequisite-step-1-setting-up-the-bluemix-and-kubernetes-cli)
+1. [Set up the Bluemix and Kubernetes CLI](#prerequisite-step-1-set-up-the-bluemix-and-kubernetes-cli)
 2. [Log in to the Bluemix CLI and initialize Bluemix Container Service plugin](#prerequisite-step-2-log-in-to-the-bluemix-cli-and-initialize-bluemix-container-service-plugin)
-3. [Set up your Bluemix Kubernetes cluster environment](#prerequisite-step-3-setting-up-your-cluster-environment)
+3. [Set up your Bluemix Kubernetes cluster environment](#prerequisite-step-3-set-up-your-cluster-environment)
 
 ## Steps
-1. [Deploy OrientDB service into Kubernetes clusters](#step-1-deploying-orientdb-service-into-kubernetes-clusters)
+1. [Deploy OrientDB service into Kubernetes clusters](#step-1-deploy-orientdb-service-into-kubernetes-clusters)
   - 1.1 [Copy OrientDB Kubernetes configuration scripts](#11-copy-orientdb-kubernetes-configuration-scripts)
   - 1.2 [Save desired OrientDB password in Kubernetes secret](#12-save-desired-orientdb-password-in-kubernetes-secret)
   - 1.3 [Configure persistent storage for OrientDB volumes](#13-configure-persistent-storage-for-orientdb-volumes)
@@ -20,9 +20,9 @@
 
 [Troubleshooting](#troubleshooting)
 
-## Prerequisite Step 1. Setting up the Bluemix and Kubernetes CLI
+## Prerequisite Step 1. Set up the Bluemix and Kubernetes CLI
 
-Setup Bluemix and Kubernetes CLI as per instructions in https://console.bluemix.net/docs/containers/cs_tutorials.html#cs_cluster_tutorial. The steps are repeated here for quick reference.
+Set up Bluemix and Kubernetes CLI as per instructions in https://console.bluemix.net/docs/containers/cs_tutorials.html#cs_cluster_tutorial. The steps are repeated here for quick reference.
 
 1. Download and Install Bluemix CLI as per instructions in https://clis.ng.bluemix.net/ui/home.html. Bluemix CLI provides the command line interface to manage applications, containers, infrastructures, services and other resources in Bluemix. The prefix for running commands by using the Bluemix CLI is `bx`.
 
@@ -96,7 +96,7 @@ Setup Bluemix and Kubernetes CLI as per instructions in https://console.bluemix.
       $ bx cs init --host https://ap-south.containers.bluemix.net
       ```
 
-## Prerequisite Step 3. Setting up your cluster environment
+## Prerequisite Step 3. Set up your cluster environment
 
 Bluemix allows you to create a free cluster that comes with 2 CPUs, 4 GB memory, and 1 worker node. This is called _lite cluster_ and allows you to get familiar with and test Kubernetes capabilities. However they lack capabilities like persistent NFS file-based storage with volumes.
 
