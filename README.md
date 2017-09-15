@@ -132,7 +132,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     $ kubectl version  --short
     ```
 
-## Step 1. Deploying OrientDB service into Kubernetes clusters
+## Step 1. Deploy OrientDB service into Kubernetes clusters
 
 ### 1.1 Copy OrientDB Kubernetes configuration scripts
 Clone or download the OrientDB Kubernetes configuration scripts to your user home directory.
