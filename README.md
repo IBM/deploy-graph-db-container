@@ -1,5 +1,12 @@
 # Deploy OrientDB container on Bluemix Kubernetes
 
+## Kubernetes Concepts Used
+* [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
+* [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/)
+* [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+* [Kubernetes Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
+* [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
+
 ## Prerequisite steps
 1. [Set up the Bluemix and Kubernetes CLI](#prerequisite-step-1-set-up-the-bluemix-and-kubernetes-cli)
 2. [Log in to the Bluemix CLI and initialize Bluemix Container Service plugin](#prerequisite-step-2-log-in-to-the-bluemix-cli-and-initialize-bluemix-container-service-plugin)
@@ -451,10 +458,7 @@ In the Workloads tab, you can see the resources that you created. When you are d
     ```
 
 # References
-* Persistent data storage options in Bluemix Kubernetes Clusters
-https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning_apps_storage
-* https://kubernetes.io/docs/concepts/storage/volumes/
-* https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+* [MovieLens recommendation engine with OrientDB](http://pizzaconnections.net/2015/03/27/148/) based on Marko Rodriguez’s elegant article on [Graph-Based Movie Recommender Engine](https://markorodriguez.com/2011/09/22/a-graph-based-movie-recommender-engine/)
 
 # License
 [Apache 2.0](LICENSE)
