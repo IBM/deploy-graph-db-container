@@ -7,6 +7,12 @@
 * [Kubernetes Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 * [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
 
+## Included Components
+* [Bluemix Container Service](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov)
+* [Bluemix Kubernetes Clusters](https://console.ng.bluemix.net/catalog/?taxonomyNavigation=apps&category=containers)
+* [Bluemix DevOps Toolchain Service](https://console.ng.bluemix.net/catalog/services/continuous-delivery)
+* [OrientDB](https://github.com/orientechnologies/orientdb)
+
 ## Prerequisite steps
 1. [Set up the Bluemix and Kubernetes CLI](#prerequisite-step-1-set-up-the-bluemix-and-kubernetes-cli)
 2. [Log in to the Bluemix CLI and initialize Bluemix Container Service plugin](#prerequisite-step-2-log-in-to-the-bluemix-cli-and-initialize-bluemix-container-service-plugin)
