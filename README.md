@@ -1,5 +1,9 @@
 # Deploy OrientDB container on Bluemix Kubernetes
-[Graph databases](https://en.wikipedia.org/wiki/Graph_database), such as [OrientDB](https://github.com/orientechnologies/orientdb), store data in a graph structure consisting of nodes, edges and properties. Graph databases, by design, allow simple and fast retrieval of complex hierarchical structures in a much more efficient manner than relational databases. [Gremlin](http://tinkerpop.apache.org/gremlin.html) is a standardised graph traversal language for retrieving data from a graph database (the way SQL is for RDBMS).
+[Graph databases](https://en.wikipedia.org/wiki/Graph_database), such as [OrientDB](https://github.com/orientechnologies/orientdb), store data in a graph structure consisting of nodes, edges and properties. Graph databases, by design, allow simple and fast retrieval of complex hierarchical structures in a much more efficient manner than relational databases. [Gremlin](http://tinkerpop.apache.org/gremlin.html) is a standardised graph traversal language for retrieving data from graph databases (the way SQL is for RDBMS).
+
+[IBM Bluemix Container Service](https://console.bluemix.net/docs/containers/cs_ov.html#cs_ov) combines [Docker](https://docs.docker.com/get-started/) and [Kubernetes](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/) to deliver powerful tools to automate the deployment, operation, scaling, and monitoring of containerized apps over a cluster of independent compute hosts by using the Kubernetes APIs.
+
+In this journey we will show you how to deploy OrinentDB container on Bluemix Kubernetes cluster.
 
 ## Kubernetes Concepts Used
 * [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
