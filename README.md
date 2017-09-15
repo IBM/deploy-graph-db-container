@@ -1,4 +1,5 @@
 # Deploy OrientDB container on Bluemix Kubernetes
+[Graph databases](https://en.wikipedia.org/wiki/Graph_database), such as [OrientDB](https://github.com/orientechnologies/orientdb), store data in a graph structure consisting of nodes, edges and properties. Graph databases, by design, allow simple and fast retrieval of complex hierarchical structures in a much more efficient manner than relational databases. [Gremlin](http://tinkerpop.apache.org/gremlin.html) is a standardised graph traversal language for retrieving data from a graph database (the way SQL is for RDBMS).
 
 ## Kubernetes Concepts Used
 * [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
