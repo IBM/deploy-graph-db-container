@@ -34,4 +34,11 @@ pv-volume   5Gi        RWO           Recycle         Bound     default/orientdb-
 $ kubectl get pvc
 NAME                STATUS    VOLUME        CAPACITY   ACCESSMODES   STORAGECLASS   AGE
 orientdb-pv-claim   Bound     pv-volume   5Gi        RWO                          4m
+
+$  bx cs workers mycluster1
+OK
+ID                                                 Public IP       Private IP      Machine Type   State    Status 
+kube-hou02-pa87e7526bacb74c79a92408445066e77e-w1   173.193.99.72   10.76.193.101   free           normal   Ready
 ```
+
+![alt text](https://github.com/IBM/deploy-graph-db-container/blob/master/images/ThreePodsConnectingToSamePV.png "Three pods connecting to same persistent volume")
