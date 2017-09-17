@@ -97,7 +97,8 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: "pv-volume-1"
-  type: local
+  labels:
+    type: local
 spec:
   capacity:
     storage: "5Gi"
@@ -111,7 +112,8 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: "pv-volume-2"
-  type: local
+  labels:
+    type: local
 spec:
   capacity:
     storage: "5Gi"
@@ -125,7 +127,8 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: "pv-volume-3"
-  type: local
+  labels:
+    type: local
 spec:
   capacity:
     storage: "5Gi"
@@ -201,6 +204,11 @@ However, in this setup the three OrientDB nodes are independent of each other wi
  * Connect to first OrientDB pod and create a new database
 ```
 $ kubectl exec -it orientdbservice-0 -- /orientdb/bin/console.sh
+
+OrientDB console v.2.2.26 (build ae9fcb9c075e1d74560a336a96b57d3661234c7b) https://www.orientdb.com
+Type 'help' to display all the supported commands.
+Installing extensions for GREMLIN language v.2.6.0
+
 orientdb> CREATE DATABASE remote:localhost/MovieRatings root <pwd> PLOCAL
 
 Creating database [remote:localhost/MovieRatings] using the storage type [plocal]...
