@@ -42,7 +42,7 @@ ID                                                 Public IP       Private IP   
 kube-hou02-pa87e7526bacb74c79a92408445066e77e-w1   173.193.99.72   10.76.193.101   free           normal   Ready
 ```
 
-![alt text](https://github.com/IBM/deploy-graph-db-container/blob/master/images/ThreePodsConnectingToSamePV.png "Three pods connecting to same persistent volume")
+![alt text](images/ThreePodsConnectingToSamePV.png "Three pods connecting to same persistent volume")
 
 ## Make sure each pod gets its own PersistentVolume independent of others by using Kubernetes StatefulSets
   * [Kubernetes StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) allow each pod to make its own PersistentVolumeClaim as shown below.
@@ -188,7 +188,6 @@ NAME          CAPACITY   ACCESSMODES   RECLAIMPOLICY   STATUS      CLAIM        
 pv-volume-1   5Gi        RWO           Recycle         Bound       default/orientdb-data-orientdbservice-2                            4h
 pv-volume-2   5Gi        RWO           Recycle         Bound       default/orientdb-data-orientdbservice-0                            4h
 pv-volume-3   5Gi        RWO           Recycle         Bound       default/orientdb-data-orientdbservice-1                            4h
-pv-volume-4   5Gi        RWO           Recycle         Available                                                                      4h
 
 $ kubectl get pvc
 NAME                              STATUS    VOLUME        CAPACITY   ACCESSMODES   STORAGECLASS   AGE
@@ -196,6 +195,7 @@ orientdb-data-orientdbservice-0   Bound     pv-volume-2   5Gi        RWO        
 orientdb-data-orientdbservice-1   Bound     pv-volume-3   5Gi        RWO                          4h
 orientdb-data-orientdbservice-2   Bound     pv-volume-1   5Gi        RWO                          4h
 ```
+![alt text](images/StatefulSets-EachPodsHasItsOwnPV.png "StatefulSets make sure each Pod gets its own PersistentVolume")
 
 However, in this setup the three OrientDB nodes are independent of each other with no database replication setup among them. This can be confirmed as shown below.
  * Connect to first OrientDB pod and create a new database
