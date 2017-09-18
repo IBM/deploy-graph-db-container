@@ -6,14 +6,14 @@
 In this journey we will show you how to deploy OrientDB container on Bluemix Kubernetes cluster.
 
 ## Kubernetes Concepts Used
-* [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
-* [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/)
-* [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
-* [Kubernetes Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
-* [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
+* [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/) - Pods represent the smallest deployable units in a Kubernetes cluster and are used to group containers that must be treated as a single unit.
+* [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) - A deployment is a Kubernetes resource where you specify your containers and other Kubernetes resources that are required to run your app, such as persistent storage, services, or annotations.
+* [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/) - A Kubernetes service groups a set of pods and provides network connection to these pods for other services in the cluster without exposing the actual private IP address of each pod. 
+* [Kubernetes Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) - PersistentVolumes are a way for users to *claim* durable storage such as NFS file storage.
+* [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) - Objects of type *secret* are intended to hold sensitive information, such as passwords, OAuth tokens, and ssh keys.
 
 ## Included Components
-* [Bluemix Container Service](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov)
+* [Bluemix Container Service](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov) 
 * [Bluemix Kubernetes Clusters](https://console.ng.bluemix.net/catalog/?taxonomyNavigation=apps&category=containers)
 * [Bluemix DevOps Toolchain Service](https://console.ng.bluemix.net/catalog/services/continuous-delivery)
 * [OrientDB](https://github.com/orientechnologies/orientdb)
