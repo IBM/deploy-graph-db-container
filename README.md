@@ -14,9 +14,9 @@ In this journey we will show you how to deploy OrientDB container on Bluemix Kub
 
 ## Included Components
 * [Bluemix Container Service](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov) 
-* [Bluemix Kubernetes Clusters](https://console.ng.bluemix.net/catalog/?taxonomyNavigation=apps&category=containers)
-* [Bluemix DevOps Toolchain Service](https://console.ng.bluemix.net/catalog/services/continuous-delivery)
-* [OrientDB](https://github.com/orientechnologies/orientdb)
+* [Bluemix Kubernetes Clusters](https://console.ng.bluemix.net/catalog/?taxonomyNavigation=apps&category=containers) - A Kubernetes cluster consists of one or more virtual machines, called worker nodes, where you can deploy, run and manage containerized apps.
+* [Bluemix DevOps Toolchain Service](https://console.ng.bluemix.net/catalog/services/continuous-delivery) - Bluemix DevOps toolchains automate the building and deployment of applications.
+* [OrientDB](https://github.com/orientechnologies/orientdb) - OrientDB is an Open Source Multi-Model NoSQL DBMS with support for Native Graphs.
 
 ## Prerequisite steps
 1. [Set up the Bluemix and Kubernetes CLI](#prerequisite-step-1-set-up-the-bluemix-and-kubernetes-cli)
