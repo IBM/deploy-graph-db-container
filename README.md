@@ -124,7 +124,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
 
 1. Create your lite Kubernetes cluster.
     ```
-    $ bx cs cluster-create --name mycluster1
+    $ bx cs cluster-create --name mycluster
     ```
     Note: It can take up to 15 minutes for the worker node machine to be ordered and for the cluster to be set up and provisioned.
 
@@ -133,16 +133,16 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
 2. Verify that the deployment of your worker node is complete.
     ```
     $ bx cs clusters
-    $ bx cs workers mycluster1
+    $ bx cs workers mycluster
     ```
 
 3. Download the Kubernetes configuration files and get the command to set the environment variable
     ```
-    $ bx cs cluster-config mycluster1
+    $ bx cs cluster-config mycluster
     ```
     Set the KUBECONFIG environment variable as per output from above command
     ```
-    $ export KUBECONFIG=~/.bluemix/plugins/container-service/clusters/mycluster1/kube-config-hou02-mycluster1.yml
+    $ export KUBECONFIG=~/.bluemix/plugins/container-service/clusters/mycluster/kube-config-hou02-mycluster.yml
     $ echo $KUBECONFIG
     ```
     Verify that the kubectl commands run properly with your cluster by checking the Kubernetes CLI server version.
@@ -305,7 +305,7 @@ $ kubectl describe service orientdbservice
 
 Get the public IP address for the worker node in the cluster.
 ```
-$ bx cs workers mycluster1
+$ bx cs workers mycluster
 ```
 
 Open a browser and check out the OrientDB dashboard with the following URL.
