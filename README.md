@@ -325,10 +325,10 @@ Type:			NodePort
 IP:			10.10.10.177
 Port:			binary	2424/TCP
 NodePort:		binary	32039/TCP
-Endpoints:		
+Endpoints:		172.xx.xxx.xx:2424
 Port:			http	2480/TCP
 NodePort:		http	31420/TCP
-Endpoints:		
+Endpoints:		172.xx.xxx.xx:2480
 Session Affinity:	None
 Events:			<none>
 ```
