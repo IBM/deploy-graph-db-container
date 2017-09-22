@@ -133,7 +133,14 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
 2. Verify that the deployment of your worker node is complete.
     ```
     $ bx cs clusters
+    OK
+    Name        ID                                 State    Created          Workers   Datacenter   Version   
+    mycluster   8xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx5   normal   34 minutes ago   1         hou02        1.7.4_1502   
+    
     $ bx cs workers mycluster
+    OK
+    ID                                                 Public IP        Private IP     Machine Type   State    Status   Version   
+    kube-hou02-pxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-w1   17x.xxx.xx.xxx   10.47.64.200   free           normal   Ready    1.7.4_1502   
     ```
 
 3. Download the Kubernetes configuration files and get the command to set the environment variable
@@ -148,6 +155,8 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     Verify that the kubectl commands run properly with your cluster by checking the Kubernetes CLI server version.
     ```
     $ kubectl version  --short
+    Client Version: v1.7.4
+    Server Version: v1.7.4-1+2967235b764341
     ```
 
 ## Step 1. Deploy OrientDB service into Kubernetes clusters
@@ -175,6 +184,7 @@ $ tr -d '\n' <password.txt >.strippedpassword.txt && mv .strippedpassword.txt pa
 Put OrientDB password in Kubernetes [secret](https://kubernetes.io/docs/concepts/configuration/secret/)
 ```
 $ kubectl create secret generic orientdb-pass --from-file=password.txt
+secret "orientdb-pass" created
 ```
 
 ### 1.3 Configure persistent storage for OrientDB volumes    
@@ -220,12 +230,16 @@ spec:
     path: /tmp/data01
 
 $ kubectl apply -f local-volumes.yaml
+persistentvolume "pv-volume" created
 ```
 
 ### 1.4 Deploy OrientDB into Kubernetes cluster
 Run the OrientDB Kubernetes configuration script in the cluster. When the deployment and the service are created, OrientDB is available as a service for users.
 ```
 $ kubectl apply -f orientdb.yaml
+persistentvolumeclaim "orientdb-pv-claim" created
+deployment "orientdbservice" created
+service "orientdbservice" created
 ```
 
 The [orientdb.yaml](orientdb.yaml) script creates a Kubernetes deployment for [OrientDB container](https://hub.docker.com/_/orientdb/). The OrientDB password is fetched from the Kubernetes secret created in Step 1.2 above. Similarly the persistent volumes configured in Step 1.3 above are used as the persistent storage for OrientDB volumes. The corresponding snippet from [orientdb.yaml](orientdb.yaml) script is shown below.
@@ -301,16 +315,35 @@ spec:
 Get information about the deployed OrientDB service to see which NodePort was assigned for OrientDB's HTTP port 2480.
 ```
 $ kubectl describe service orientdbservice
+Name:			orientdbservice
+Namespace:		default
+Labels:			service=orientdb
+			type=nodeport-service
+Annotations:		kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"service":"orientdb","type":"nodeport-service"},"name":"orientdbservice","na...
+Selector:		service=orientdb,type=container-deployment
+Type:			NodePort
+IP:			10.10.10.177
+Port:			binary	2424/TCP
+NodePort:		binary	32039/TCP
+Endpoints:		
+Port:			http	2480/TCP
+NodePort:		http	31420/TCP
+Endpoints:		
+Session Affinity:	None
+Events:			<none>
 ```
 
 Get the public IP address for the worker node in the cluster.
 ```
 $ bx cs workers mycluster
+OK
+ID                                                 Public IP        Private IP     Machine Type   State    Status   Version   
+kube-hou02-pa85736d86a8f24324806f9b83d24960e5-w1   173.xxx.xx.xxx   10.47.64.200   free           normal   Ready    1.7.4_1502   
 ```
 
 Open a browser and check out the OrientDB dashboard with the following URL.
 ```
-http://<IP_address>:<HTTP_NodePort>/studio/index.html
+http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html
 ```    
 ![alt text](images/OrientDB-dashboard.png "OrientDB Dashboard")
 
