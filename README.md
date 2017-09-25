@@ -1,9 +1,15 @@
 # Deploy OrientDB container on Bluemix Kubernetes
 [Graph databases](https://en.wikipedia.org/wiki/Graph_database), such as [OrientDB](https://github.com/orientechnologies/orientdb), store data in a graph structure consisting of nodes, edges and properties. Graph databases, by design, allow simple and fast retrieval of complex hierarchical structures in a much more efficient manner than relational databases. [Gremlin](http://tinkerpop.apache.org/gremlin.html) is a standardised graph traversal language for retrieving data from graph databases (the way SQL is for RDBMS).
 
+In this journey we show you how to quickly deploy OrientDB on Bluemix Container Service, so that you can leverage it for your team's development and test purposes.
+
 [IBM Bluemix Container Service](https://console.bluemix.net/docs/containers/cs_ov.html#cs_ov) combines [Docker](https://docs.docker.com/get-started/) and [Kubernetes](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/) to deliver powerful tools to automate the deployment, operation, scaling, and monitoring of containerized apps over a cluster of independent compute hosts by using the Kubernetes APIs.
 
-In this journey we will show you how to deploy OrientDB container on Bluemix Kubernetes cluster.
+This journey gives you step by step instructions for deploying OrientDB container on Bluemix Kubernetes. Steps for storing the desired OrientDB password in Kubernetes *secret*, and configuring the persistent storage for OrientDB volumes by making use of Kubernetes *persistent volume claim* are also given. In addition, it shows you how to leverage the Kubernetes feature of getting a shell to a running container, to open the deployed OrientDB's console as well as Gremlin console.
+
+## Watch the Video
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=SY-x6mlDAlc" target="_blank"><img src="images/BluemixKubernetesComponents.png" 
+alt="Overview of deploying OrientDB container on Bluemix Kubernetes" width="640" border="10" /></a>
 
 ## Kubernetes Concepts Used
 * [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/) - Pods represent the smallest deployable units in a Kubernetes cluster and are used to group containers that must be treated as a single unit.
