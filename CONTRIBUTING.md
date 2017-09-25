@@ -26,7 +26,7 @@ component affected.
 For more details, see the [MAINTAINERS](MAINTAINERS.md) page.
 
 ## Communication
-Please feel free to connect with us on our [Slack channel](https://dwopen.slack.com).
+Please feel free to connect with us through [issues](https://github.com/IBM/deploy-graph-db-container/issues).
 
 <!-- ## Setup
 Please add any special setup instructions for your project to help the developer become productive quickly.
