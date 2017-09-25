@@ -292,8 +292,6 @@ spec:
           claimName: orientdb-pv-claim
 ```
 
-If you are using Bluemix *standard* Kubernetes cluster, then it is recommended that you increase the number of replicas to 3 or more. You can also spread deployment pods across multiple nodes (anti-affinity) as per instructions in https://console.bluemix.net/docs/containers/cs_planning.html#highly_available_apps
-    
 The [orientdb.yaml](orientdb.yaml) script also exposes OrientDB ports (HTTP: 2480 and binary: 2424) to the internet by creating a Kubernetes service of type NodePort as shown in the snippet below.
 ```
 kind: Service
