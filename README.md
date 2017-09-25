@@ -8,7 +8,7 @@ In this journey we show you how to quickly deploy OrientDB on Bluemix Container 
 This journey gives you step by step instructions for deploying OrientDB container on Bluemix Kubernetes. Steps for storing the desired OrientDB password in Kubernetes *secret*, and configuring the persistent storage for OrientDB volumes by making use of Kubernetes *persistent volume claim* are also given. In addition, it shows you how to leverage the Kubernetes feature of getting a shell to a running container, to open the deployed OrientDB's console as well as Gremlin console.
 
 ## Watch the Overview Video
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=SY-x6mlDAlc" target="_blank"><img src="images/BluemixKubernetesComponents.png" 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=SY-x6mlDAlc" target="_blank"><img src="doc/source/images/BluemixKubernetesComponents.png" 
 alt="Overview of deploying OrientDB container on Bluemix Kubernetes" width="640" border="10" /></a>
 
 ## Kubernetes Concepts Used
@@ -349,7 +349,7 @@ Open a browser and check out the OrientDB dashboard with the following URL.
 ```
 http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html
 ```    
-![alt text](images/OrientDB-dashboard.png "OrientDB Dashboard")
+![OrientDB Dashboard](doc/source/images/OrientDB-dashboard.png "OrientDB Dashboard")
 
 ### 1.6 View a local version of the Kubernetes dashboard.  
 Launch your Kubernetes dashboard with the default port 8001.
@@ -359,7 +359,7 @@ $ kubectl proxy
 
 Open the following URL in a web browser to see the Kubernetes dashboard.
 http://localhost:8001/ui
-![alt text](images/KubernetesDashboard.png "Kubernetes Dashboard")
+![Kubernetes Dashboard](doc/source/images/KubernetesDashboard.png "Kubernetes Dashboard")
 
 In the Workloads tab, you can see the resources that you created. When you are done exploring the Kubernetes dashboard, use CTRL+C to exit the proxy command.
 
@@ -402,7 +402,7 @@ In the Workloads tab, you can see the resources that you created. When you are d
     * Click on any of the movie vertices. Under *Settings*, next to *Display*, select *title*.
       
       This will show the movie title below each of the *Movie* vertices as shown in the snapshot below.
-      ![alt text](images/OrientDB-GraphEditor.png "OrientDB Graph Editor")
+      ![OrientDB Graph Editor](doc/source/images/OrientDB-GraphEditor.png "OrientDB Graph Editor")
 
 ### 2.3 Open Gremlin/OrientDB console and run queries
 
