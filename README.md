@@ -8,7 +8,7 @@ In this journey we show you how to quickly deploy OrientDB on Bluemix Container 
 This journey gives you step by step instructions for deploying OrientDB container on Bluemix Kubernetes. Steps for storing the desired OrientDB password in Kubernetes *secret*, and configuring the persistent storage for OrientDB volumes by making use of Kubernetes *persistent volume claim* are also given. In addition, it shows you how to leverage the Kubernetes feature of getting a shell to a running container, to open the deployed OrientDB's console as well as Gremlin console.
 
 ## Watch the Overview Video
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=SY-x6mlDAlc" target="_blank"><img src="doc/source/images/BluemixKubernetesComponents.png" 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=SY-x6mlDAlc" target="_blank"><img src="doc/source/images/Architecture.png" 
 alt="Overview of deploying OrientDB container on Bluemix Kubernetes" width="640" border="10" /></a>
 
 ## Kubernetes Concepts Used
