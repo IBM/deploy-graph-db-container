@@ -42,7 +42,7 @@ ID                                                 Public IP       Private IP   
 kube-hou02-pa87e7526bacb74c79a92408445066e77e-w1   173.193.99.72   10.76.193.101   free           normal   Ready
 ```
 
-![Three pods connecting to same persistent volume](doc/source/images/ThreePodsConnectingToSamePV.png "Three pods connecting to same persistent volume")
+<img src="doc/source/images/ThreePodsConnectingToSamePV.png" alt="Three pods connecting to same persistent volume" width="400" border="10" />
 
 ## Make sure each pod gets its own PersistentVolume independent of others by using Kubernetes StatefulSets
   * [Kubernetes StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) allow each pod to make its own PersistentVolumeClaim as shown below.
@@ -198,7 +198,7 @@ orientdb-data-orientdbservice-0   Bound     pv-volume-2   5Gi        RWO        
 orientdb-data-orientdbservice-1   Bound     pv-volume-3   5Gi        RWO                          4h
 orientdb-data-orientdbservice-2   Bound     pv-volume-1   5Gi        RWO                          4h
 ```
-![StatefulSets make sure each Pod gets its own PersistentVolume](doc/source/images/StatefulSets-EachPodsHasItsOwnPV.png "StatefulSets make sure each Pod gets its own PersistentVolume")
+<img src="doc/source/images/StatefulSets-EachPodsHasItsOwnPV.png" alt="StatefulSets make sure each Pod gets its own PersistentVolume" width="400" border="10" />
 
 However, in this setup the three OrientDB nodes are independent of each other with no database replication setup among them. This can be confirmed as shown below.
  * Connect to first OrientDB pod and create a new database
