@@ -12,8 +12,7 @@ This journey gives you step by step instructions for:
 * Opening the deployed OrientDB's console as well as Gremlin console by making use of Kubernetes feature of getting a shell to a running container.
 
 ## Watch the Overview Video
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=SY-x6mlDAlc" target="_blank"><img src="doc/source/images/Architecture.png" 
-alt="Overview of deploying OrientDB container on Bluemix Kubernetes" width="640" border="10" /></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=SY-x6mlDAlc" target="_blank"><img src="doc/source/images/Architecture.png" alt="Overview of deploying OrientDB container on Bluemix Kubernetes" width="640" border="10" /></a>
 
 ## Kubernetes Concepts Used
 * [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/) - Pods represent the smallest deployable units in a Kubernetes cluster and are used to group containers that must be treated as a single unit.
@@ -373,7 +372,7 @@ In the Workloads tab, you can see the resources that you created. When you are d
 
   * In the OrientDB dashboard, click on the cloud import button (next to *New DB*).
   * Specify username (root) and password (same as the value specified in password.txt).
-  * Scroll down to *MovieRatings* database and click on import button.
+  * Scroll down to *MovieRatings* database and click on download button.
     
     This will import a database containing Movies classified by Genre and Ratings by Users, created by MovieLens (movielens.org).
     
@@ -399,8 +398,10 @@ In the Workloads tab, you can see the resources that you created. When you are d
       ```
       select from users where id = 1
       ```
-    * Click on the *User* vertex at the center. In the ring that pops up, select outgoing edges, and click on *rated*.
-      
+    * Click on the *User* vertex at the center. In the ring that pops up, hover over outgoing edges, and click on *rated*.
+      <img src="doc/source/images/DisplayingGraphEdges.png" alt="How to display graph edges" width="240" border="10" />
+      ![How to display graph edges](doc/source/images/DisplayingGraphEdges.png)
+
       All the movies rated by this user will be shown.
     
     * Click on any of the movie vertices. Under *Settings*, next to *Display*, select *title*.
