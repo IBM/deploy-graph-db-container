@@ -400,7 +400,6 @@ In the Workloads tab, you can see the resources that you created. When you are d
       ```
     * Click on the *User* vertex at the center. In the ring that pops up, hover over outgoing edges, and click on *rated*.
       <img src="doc/source/images/DisplayingGraphEdges.png" alt="How to display graph edges" width="240" border="10" />
-      ![How to display graph edges](doc/source/images/DisplayingGraphEdges.png)
 
       All the movies rated by this user will be shown.
     
