@@ -12,7 +12,7 @@ This journey gives you step by step instructions for:
 * Opening the deployed OrientDB's console as well as Gremlin console by making use of Kubernetes feature of getting a shell to a running container.
 
 ## Watch the Overview Video
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=SY-x6mlDAlc" target="_blank"><img src="doc/source/images/Architecture.png" alt="Overview of deploying OrientDB container on Bluemix Kubernetes" width="640" border="10" /></a>
+<a href="https://youtu.be/bG3xynJs0T8" target="_blank"><img src="doc/source/images/Architecture.png" alt="Overview of deploying OrientDB container on Bluemix Kubernetes" width="640" border="10" /></a>
 
 ## Kubernetes Concepts Used
 * [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/) - Pods represent the smallest deployable units in a Kubernetes cluster and are used to group containers that must be treated as a single unit.
