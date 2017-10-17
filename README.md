@@ -39,12 +39,11 @@ This journey gives you step by step instructions for:
 * [Bluemix DevOps Toolchain Service](https://console.ng.bluemix.net/catalog/services/continuous-delivery) - Bluemix DevOps toolchains automate the building and deployment of applications. -->
 * [OrientDB](https://github.com/orientechnologies/orientdb) - OrientDB is an Open Source Multi-Model NoSQL DBMS with support for Native Graphs.
 
-## Prerequisite steps
-1. [Set up the Bluemix and Kubernetes CLI](#prerequisite-step-1-set-up-the-bluemix-and-kubernetes-cli)
-2. [Log in to the Bluemix CLI and initialize Bluemix Container Service plugin](#prerequisite-step-2-log-in-to-the-bluemix-cli-and-initialize-bluemix-container-service-plugin)
-3. [Set up your Bluemix Kubernetes cluster environment](#prerequisite-step-3-set-up-your-cluster-environment)
-
 ## Steps
+0. [Prerequisites](step-0-prerequisites)
+  - 0.1 [Set up the Bluemix and Kubernetes CLI](#01-set-up-the-bluemix-and-kubernetes-cli)
+  - 0.2 [Log in to the Bluemix CLI and initialize Bluemix Container Service plugin](#02-log-in-to-the-bluemix-cli-and-initialize-bluemix-container-service-plugin)
+  - 0.3 [Set up your Bluemix Kubernetes cluster environment](#03-set-up-your-cluster-environment)
 1. [Deploy OrientDB service into Kubernetes clusters](#step-1-deploy-orientdb-service-into-kubernetes-clusters)
   - 1.1 [Copy OrientDB Kubernetes configuration scripts](#11-copy-orientdb-kubernetes-configuration-scripts)
   - 1.2 [Save desired OrientDB password in Kubernetes secret](#12-save-desired-orientdb-password-in-kubernetes-secret)
@@ -59,18 +58,20 @@ This journey gives you step by step instructions for:
 
 [Troubleshooting](#troubleshooting)
 
-## Prerequisite Step 1. Set up the Bluemix and Kubernetes CLI
+## Step 0. Prerequisites
+
+### 0.1 Set up the Bluemix and Kubernetes CLI
 
 Set up Bluemix and Kubernetes CLI as per instructions in https://console.bluemix.net/docs/containers/cs_tutorials.html#cs_cluster_tutorial. The steps are repeated here for quick reference.
 
-1. Download and Install Bluemix CLI as per instructions in https://clis.ng.bluemix.net/ui/home.html. Bluemix CLI provides the command line interface to manage applications, containers, infrastructures, services and other resources in Bluemix. The prefix for running commands by using the Bluemix CLI is `bx`.
+  * Download and Install Bluemix CLI as per instructions in https://clis.ng.bluemix.net/ui/home.html. Bluemix CLI provides the command line interface to manage applications, containers, infrastructures, services and other resources in Bluemix. The prefix for running commands by using the Bluemix CLI is `bx`.
 
-2. Install the IBM Bluemix Container Service plug-in, which allows you to create Kubernetes clusters and manage worker nodes. The prefix for running commands by using the IBM Bluemix Container Service plug-in is `bx cs`.
+  * Install the IBM Bluemix Container Service plug-in, which allows you to create Kubernetes clusters and manage worker nodes. The prefix for running commands by using the IBM Bluemix Container Service plug-in is `bx cs`.
     ```
     $ bx plugin install container-service -r Bluemix
     ```
 
-3. Install Kubernetes CLI. This allows you to deploy apps into your Kubernetes clusters and to view a local version of the Kubernetes dashboard. The prefix for running commands by using the Kubernetes CLI is `kubectl`.
+  * Install Kubernetes CLI. This allows you to deploy apps into your Kubernetes clusters and to view a local version of the Kubernetes dashboard. The prefix for running commands by using the Kubernetes CLI is `kubectl`.
 
     Instructions for installing Kubernetes CLI on macOS are given below. Please see https://kubernetes.io/docs/tasks/tools/install-kubectl/ for other methods to install `kubectl` and for instructions to install Kubernetes CLI on other platforms.
     *  Download the Kubernetes CLI
@@ -86,9 +87,9 @@ Set up Bluemix and Kubernetes CLI as per instructions in https://console.bluemix
         $ sudo mv ./kubectl /usr/local/bin/
         ```
 
-## Prerequisite Step 2. Log in to the Bluemix CLI and initialize Bluemix Container Service plugin
+### 0.2 Log in to the Bluemix CLI and initialize Bluemix Container Service plugin
 
-1. Log in to the Bluemix CLI. Enter your Bluemix credentials when prompted.
+  * Log in to the Bluemix CLI. Enter your Bluemix credentials when prompted.
     ```
     $ bx login -a api.ng.bluemix.net
     $ bx target --cf
@@ -112,7 +113,7 @@ Set up Bluemix and Kubernetes CLI as per instructions in https://console.bluemix
         $ bx login -a api.au-syd.bluemix.net
         ```
 
-2. Initialize the IBM Bluemix Container Service plugin
+  * Initialize the IBM Bluemix Container Service plugin
     ```
     $ bx cs init
     ```
@@ -135,7 +136,7 @@ Set up Bluemix and Kubernetes CLI as per instructions in https://console.bluemix
       $ bx cs init --host https://ap-south.containers.bluemix.net
       ```
 
-## Prerequisite Step 3. Set up your cluster environment
+### 0.3 Set up your cluster environment
 
 Bluemix allows you to create a free cluster that comes with 2 CPUs, 4 GB memory, and 1 worker node. This is called _lite cluster_ and allows you to get familiar with and test Kubernetes capabilities. However they lack capabilities like persistent NFS file-based storage with volumes.
 
@@ -143,7 +144,7 @@ To setup your cluster for maximum availability and capacity, Bluemix allows you 
 
 A detailed comparison of capabilities of _lite_ and _standard_ clusters is given in https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning.
 
-1. Create your lite Kubernetes cluster.
+  * Create your lite Kubernetes cluster.
     ```
     $ bx cs cluster-create --name mycluster
     ```
@@ -151,7 +152,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
 
     In case you want to setup a standard cluster, then you can find the setup instructions in https://console.bluemix.net/docs/containers/cs_cluster.html#cs_cluster_cli.
 
-2. Verify that the deployment of your worker node is complete.
+  * Verify that the deployment of your worker node is complete.
     ```
     $ bx cs clusters
     OK
@@ -164,7 +165,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     kube-hou02-pxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-w1   17x.xxx.xx.xxx   10.47.64.200   free           normal   Ready    1.7.4_1502   
     ```
 
-3. Download the Kubernetes configuration files and get the command to set the environment variable
+  * Download the Kubernetes configuration files and get the command to set the environment variable
     ```
     $ bx cs cluster-config mycluster
     ```
