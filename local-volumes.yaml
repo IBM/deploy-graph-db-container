@@ -11,4 +11,5 @@ spec:
     - "ReadWriteOnce"
   hostPath:
     path: /tmp/data01
+    type: DirectoryOrCreate
   persistentVolumeReclaimPolicy: Recycle
