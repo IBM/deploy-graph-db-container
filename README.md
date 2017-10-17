@@ -50,8 +50,8 @@ This journey gives you step by step instructions for:
   - 1.2 [Save desired OrientDB password in Kubernetes secret](#12-save-desired-orientdb-password-in-kubernetes-secret)
   - 1.3 [Configure persistent storage for OrientDB volumes](#13-configure-persistent-storage-for-orientdb-volumes)
   - 1.4 [Deploy OrientDB into Kubernetes cluster](#14-deploy-orientdb-into-kubernetes-cluster)
-  - 1.5 [Open OrientDB dashboard](#15-open-orientdb-dashboard)
-  - 1.6 [View a local version of the Kubernetes dashboard](#16-view-a-local-version-of-the-kubernetes-dashboard)
+  - 1.5 [View a local version of the Kubernetes dashboard](#15-view-a-local-version-of-the-kubernetes-dashboard)
+  - 1.6 [Open OrientDB dashboard](#16-open-orientdb-dashboard)
 2. [Import a public database and explore it using OrientDB Dashboard and Gremlin console](#step-2-import-a-public-database-and-explore-it-using-orientdb-dashboard-and-gremlin-console)
   - 2.1 [Import a public database](#21-import-a-public-database)
   - 2.2 [Explore schema and data (vertices/edges) using OrientDB dashboard](#22-explore-schema-and-data-verticesedges-using-orientdb-dashboard)
@@ -330,7 +330,19 @@ spec:
     name: http
 ```
 
-### 1.5 Open OrientDB dashboard
+### 1.5 View a local version of the Kubernetes dashboard.  
+Launch your Kubernetes dashboard with the default port 8001.
+```
+$ kubectl proxy
+```
+
+Open the following URL in a web browser to see the Kubernetes dashboard.
+http://localhost:8001/ui
+![Kubernetes Dashboard](doc/source/images/KubernetesDashboard.png "Kubernetes Dashboard")
+
+In the Workloads tab, you can see the resources that you created. When you are done exploring the Kubernetes dashboard, use CTRL+C to exit the proxy command.
+
+### 1.6 Open OrientDB dashboard
 Get information about the deployed OrientDB service to see which NodePort was assigned for OrientDB's HTTP port 2480.
 ```
 $ kubectl describe service orientdbservice
@@ -365,18 +377,6 @@ Open a browser and check out the OrientDB dashboard with the following URL.
 http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html
 ```    
 ![OrientDB Dashboard](doc/source/images/OrientDB-dashboard.png "OrientDB Dashboard")
-
-### 1.6 View a local version of the Kubernetes dashboard.  
-Launch your Kubernetes dashboard with the default port 8001.
-```
-$ kubectl proxy
-```
-
-Open the following URL in a web browser to see the Kubernetes dashboard.
-http://localhost:8001/ui
-![Kubernetes Dashboard](doc/source/images/KubernetesDashboard.png "Kubernetes Dashboard")
-
-In the Workloads tab, you can see the resources that you created. When you are done exploring the Kubernetes dashboard, use CTRL+C to exit the proxy command.
 
 ## Step 2. Import a public database and explore it using OrientDB Dashboard and Gremlin console
 
