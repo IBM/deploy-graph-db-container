@@ -11,8 +11,20 @@ This journey gives you step by step instructions for:
 * Configuring the persistent storage for OrientDB volumes by making use of Kubernetes persistent volume claim.
 * Opening the deployed OrientDB's console as well as Gremlin console by making use of Kubernetes feature of getting a shell to a running container.
 
+# Flow
+
+<img src="doc/source/images/Architecture.png" alt="Architecture/Flow diagram" width="640" border="10" />
+
+1. Log in to Bluemix CLI and initialize Bluemix Container Service plugin.
+2. Set context for Kubernetes CLI by downloading Bluemix Kubernetes configuration files and setting KUBECONFIG environment variable.
+3. Save desired OrientDB password in Kubernetes secret.
+4. Configure persistent storage for OrientDB volumes.
+5. Deploy OrientDB container and NodePort service to Kubernetes cluster.
+6. Access OrientDB dashboard by using the public IP address of worker node and the NodePort mapped to OrientDB's HTTP port.
+
 ## Watch the Overview Video
-<a href="https://youtu.be/bG3xynJs0T8" target="_blank"><img src="doc/source/images/Architecture.png" alt="Overview of deploying OrientDB container on Bluemix Kubernetes" width="640" border="10" /></a>
+
+[![](http://img.youtube.com/vi/bG3xynJs0T8/0.jpg)](https://youtu.be/bG3xynJs0T8)
 
 ## Kubernetes Concepts Used
 * [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/) - Pods represent the smallest deployable units in a Kubernetes cluster and are used to group containers that must be treated as a single unit.
