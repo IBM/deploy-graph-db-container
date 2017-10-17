@@ -514,19 +514,32 @@ http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html
 
 # Troubleshooting
 
-* If you want to delete the OrientDB service from your Bluemix Kubernetes cluster, you can run the following command.
+* If you want to delete the OrientDB service from your Bluemix Kubernetes cluster, then you can run either of the following commands.
     ```
     $ kubectl delete -f orientdb.yaml
     ```
-* If you want to delete your local persistent volume, you can run the following command.
+    OR
+    ```
+    $ kubectl delete deployment,services,pvc -l service=orientdb
+    deployment "orientdbservice" deleted
+    service "orientdbservice" deleted
+    persistentvolumeclaim "orientdb-pv-claim" deleted
+    ```
+* If you want to delete your local persistent volume, then you can run either of the following commands.
     ```
     $ kubectl delete -f local-volumes.yaml
     ```
-* If you want to delete the Kubernetes sceret containing OrientDB password, you can run the following command.
+    OR
+    ```
+    $ kubectl delete pv -l type=local
+    persistentvolume "pv-volume" deleted
+    ```
+* If you want to delete the Kubernetes sceret containing OrientDB password, then you can run the following command.
     ```
     $ kubectl delete secret orientdb-pass
+    secret "orientdb-pass" deleted
     ```
-* For debugging purposes, if you want to inspect the logs of OrientDB service, you can run the following command.
+* For debugging purposes, if you want to inspect the logs of OrientDB service, then you can run the following command.
     ```
     $ kubectl get pods # Get the name of the OrientDB pod
     $ kubectl logs [OrientDB pod name]
