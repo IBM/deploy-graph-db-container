@@ -44,7 +44,7 @@ This journey gives you step by step instructions for:
   - 0.1 [Install CLI for Bluemix and Kubernetes](#01-install-cli-for-bluemix-and-kubernetes)
   - 0.2 [Log in to the Bluemix CLI and initialize Bluemix Container Service plugin](#02-log-in-to-the-bluemix-cli-and-initialize-bluemix-container-service-plugin)
   - 0.3 [Create your Bluemix Kubernetes cluster](#03-create-your-bluemix-kubernetes-cluster)
-  - 0.4 [Point Kubernetes CLI to your Bluemix Kubernetes cluster](#04-point-kubernetes-cli-to-your-bluemix-kubernetes-cluster)
+  - 0.4 [Point the Kubernetes CLI to your Bluemix Kubernetes cluster](#04-point-the-kubernetes-cli-to-your-bluemix-kubernetes-cluster)
 1. [Deploy OrientDB service into Kubernetes clusters](#step-1-deploy-orientdb-service-into-kubernetes-clusters)
   - 1.1 [Copy OrientDB Kubernetes configuration scripts](#11-copy-orientdb-kubernetes-configuration-scripts)
   - 1.2 [Save desired OrientDB password in Kubernetes secret](#12-save-desired-orientdb-password-in-kubernetes-secret)
@@ -166,7 +166,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     kube-hou02-pxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-w1   17x.xxx.xx.xxx   10.47.64.200   free           normal   Ready    1.7.4_1502   
     ```
 
-### 0.4 Point Kubernetes CLI to your Bluemix Kubernetes cluster
+### 0.4 Point the Kubernetes CLI to your Bluemix Kubernetes cluster
 
 Configure your Kubernetes CLI environment to point to your Bluemix Kubernetes cluster as below.
 
