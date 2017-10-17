@@ -40,7 +40,7 @@ This journey gives you step by step instructions for:
 * [OrientDB](https://github.com/orientechnologies/orientdb) - OrientDB is an Open Source Multi-Model NoSQL DBMS with support for Native Graphs.
 
 ## Steps
-0. [Prerequisites](step-0-prerequisites)
+0. [Prerequisites](#step-0-prerequisites)
   - 0.1 [Set up the Bluemix and Kubernetes CLI](#01-set-up-the-bluemix-and-kubernetes-cli)
   - 0.2 [Log in to the Bluemix CLI and initialize Bluemix Container Service plugin](#02-log-in-to-the-bluemix-cli-and-initialize-bluemix-container-service-plugin)
   - 0.3 [Set up your Bluemix Kubernetes cluster environment](#03-set-up-your-cluster-environment)
@@ -250,7 +250,9 @@ spec:
     - "ReadWriteOnce"
   hostPath:
     path: /tmp/data01
-
+```
+Create hostPath persistent volume
+```
 $ kubectl apply -f local-volumes.yaml
 persistentvolume "pv-volume" created
 ```
