@@ -41,9 +41,10 @@ This journey gives you step by step instructions for:
 
 ## Steps
 0. [Prerequisites](#step-0-prerequisites)
-  - 0.1 [Set up the Bluemix and Kubernetes CLI](#01-set-up-the-bluemix-and-kubernetes-cli)
+  - 0.1 [Install CLI for Bluemix and Kubernetes](#01-install-cli-for-bluemix-and-kubernetes)
   - 0.2 [Log in to the Bluemix CLI and initialize Bluemix Container Service plugin](#02-log-in-to-the-bluemix-cli-and-initialize-bluemix-container-service-plugin)
-  - 0.3 [Set up your Bluemix Kubernetes cluster environment](#03-set-up-your-cluster-environment)
+  - 0.3 [Create your Bluemix Kubernetes cluster](#03-create-your-bluemix-kubernetes-cluster)
+  - 0.4 [Point Kubernetes CLI to your Bluemix Kubernetes cluster](#04-point-kubernetes-cli-to-your-bluemix-kubernetes-cluster)
 1. [Deploy OrientDB service into Kubernetes clusters](#step-1-deploy-orientdb-service-into-kubernetes-clusters)
   - 1.1 [Copy OrientDB Kubernetes configuration scripts](#11-copy-orientdb-kubernetes-configuration-scripts)
   - 1.2 [Save desired OrientDB password in Kubernetes secret](#12-save-desired-orientdb-password-in-kubernetes-secret)
@@ -60,7 +61,7 @@ This journey gives you step by step instructions for:
 
 ## Step 0. Prerequisites
 
-### 0.1 Set up the Bluemix and Kubernetes CLI
+### 0.1 Install CLI for Bluemix and Kubernetes
 
 Set up Bluemix and Kubernetes CLI as per instructions in https://console.bluemix.net/docs/containers/cs_tutorials.html#cs_cluster_tutorial. The steps are repeated here for quick reference.
 
@@ -136,7 +137,7 @@ Set up Bluemix and Kubernetes CLI as per instructions in https://console.bluemix
       $ bx cs init --host https://ap-south.containers.bluemix.net
       ```
 
-### 0.3 Set up your cluster environment
+### 0.3 Create your Bluemix Kubernetes cluster
 
 Bluemix allows you to create a free cluster that comes with 2 CPUs, 4 GB memory, and 1 worker node. This is called _lite cluster_ and allows you to get familiar with and test Kubernetes capabilities. However they lack capabilities like persistent NFS file-based storage with volumes.
 
@@ -165,16 +166,22 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     kube-hou02-pxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-w1   17x.xxx.xx.xxx   10.47.64.200   free           normal   Ready    1.7.4_1502   
     ```
 
+### 0.4 Point Kubernetes CLI to your Bluemix Kubernetes cluster
+
+Configure your Kubernetes CLI environment to point to your Bluemix Kubernetes cluster as below.
+
   * Download the Kubernetes configuration files and get the command to set the environment variable
     ```
     $ bx cs cluster-config mycluster
     ```
-    Set the KUBECONFIG environment variable as per output from above command
+
+  * Set the KUBECONFIG environment variable as per output from above command
     ```
     $ export KUBECONFIG=~/.bluemix/plugins/container-service/clusters/mycluster/kube-config-hou02-mycluster.yml
     $ echo $KUBECONFIG
     ```
-    Verify that the kubectl commands run properly with your cluster by checking the Kubernetes CLI server version.
+
+  * Verify that the kubectl commands run properly with your cluster by checking the Kubernetes CLI server version.
     ```
     $ kubectl version  --short
     Client Version: v1.7.4
