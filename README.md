@@ -250,13 +250,16 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: "pv-volume"
+  labels:
+    type: local
 spec:
   capacity:
     storage: "5Gi"
   accessModes:
     - "ReadWriteOnce"
   hostPath:
-    path: /tmp/data01
+    path: "/tmp/data01"
+  persistentVolumeReclaimPolicy: Recycle
 ```
 Create hostPath persistent volume
 ```
