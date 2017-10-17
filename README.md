@@ -263,7 +263,7 @@ spec:
 ```
 Create hostPath persistent volume
 ```
-$ kubectl apply -f local-volumes.yaml
+$ kubectl apply -f local-volumes.yaml --validate=false
 persistentvolume "pv-volume" created
 ```
 
