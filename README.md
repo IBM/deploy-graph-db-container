@@ -148,6 +148,10 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
   * Create your lite Kubernetes cluster.
     ```
     $ bx cs cluster-create --name mycluster
+    Creating cluster...
+    The machine-type flag was not specified. So a free cluster will be created
+    Number of workers was not specified, using default: 1.
+    OK
     ```
     Note: It can take up to 15 minutes for the worker node machine to be ordered and for the cluster to be set up and provisioned.
 
@@ -158,12 +162,12 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     $ bx cs clusters
     OK
     Name        ID                                 State    Created          Workers   Datacenter   Version   
-    mycluster   8xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx5   normal   34 minutes ago   1         hou02        1.7.4_1502   
+    mycluster   8xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx5   normal   34 minutes ago   1         hou02        1.7.4_1503
     
     $ bx cs workers mycluster
     OK
     ID                                                 Public IP        Private IP     Machine Type   State    Status   Version   
-    kube-hou02-pxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-w1   17x.xxx.xx.xxx   10.47.64.200   free           normal   Ready    1.7.4_1502   
+    kube-hou02-pxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-w1   17x.xxx.xx.xxx   10.47.64.200   free           normal   Ready    1.7.4_1503
     ```
 
 ### 0.4 Point the Kubernetes CLI to your Bluemix Kubernetes cluster
