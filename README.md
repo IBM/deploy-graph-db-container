@@ -177,6 +177,10 @@ Configure your Kubernetes CLI environment to point to your Bluemix Kubernetes cl
   * Download the Kubernetes configuration files and get the command to set the environment variable
     ```
     $ bx cs cluster-config mycluster
+    OK
+    The configuration for mycluster was downloaded successfully. Export environment variables to start using Kubernetes.
+
+    export KUBECONFIG=/Users/zzzzz/.bluemix/plugins/container-service/clusters/mycluster/kube-config-hou02-mycluster.yml
     ```
 
   * Set the KUBECONFIG environment variable as per output from above command
@@ -189,7 +193,7 @@ Configure your Kubernetes CLI environment to point to your Bluemix Kubernetes cl
     ```
     $ kubectl version  --short
     Client Version: v1.7.4
-    Server Version: v1.7.4-1+2967235b764341
+    Server Version: v1.7.4-1+1540c973d4ff9d
     ```
 
 ## Step 1. Deploy OrientDB service into Kubernetes clusters
