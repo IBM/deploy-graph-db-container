@@ -395,7 +395,7 @@ kube-hou02-pa85736d86a8f24324806f9b83d24960e5-w1   173.xxx.xx.xxx   10.47.64.200
 
 Open a browser and check out the OrientDB dashboard with the following URL.
 ```
-http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html
+http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html#/
 ```    
 ![OrientDB Dashboard](doc/source/images/OrientDB-dashboard.png "OrientDB Dashboard")
 
