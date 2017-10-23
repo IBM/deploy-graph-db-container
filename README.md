@@ -266,12 +266,12 @@ spec:
   accessModes:
     - "ReadWriteOnce"
   hostPath:
-    path: "/tmp/data01"
+    path: /tmp
   persistentVolumeReclaimPolicy: Recycle
 ```
 Create hostPath persistent volume
 ```
-$ kubectl apply -f local-volumes.yaml --validate=false
+$ kubectl apply -f local-volumes.yaml
 persistentvolume "pv-volume" created
 ```
 
