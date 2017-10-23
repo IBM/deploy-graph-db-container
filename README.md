@@ -555,7 +555,7 @@ http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html#/
     $ kubectl get pods # Get the name of the OrientDB pod
     $ kubectl logs [OrientDB pod name]
     ```
-* If you want to delete your Bluemix Kubernetes Lite cluster, then run the following command.
+* If you want to delete your Bluemix Kubernetes cluster, then run the following command.
     ```
     $ bx cs cluster-rm mycluster
     Remove the cluster? [mycluster] (Y/N)> Y
