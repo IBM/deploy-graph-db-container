@@ -13,7 +13,7 @@ This journey gives you step by step instructions for:
 
 # Flow
 
-<img src="doc/source/images/Architecture.png" alt="Architecture/Flow diagram" width="640" border="10" />
+<img src="doc/source/images/architecture.png" alt="architecture/Flow diagram" width="640" border="10" />
 
 1. Log in to Bluemix CLI and initialize Bluemix Container Service plugin.
 2. Set context for Kubernetes CLI by downloading Bluemix Kubernetes configuration files and setting KUBECONFIG environment variable.
