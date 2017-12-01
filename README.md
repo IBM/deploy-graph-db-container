@@ -29,7 +29,7 @@ This journey gives you step by step instructions for:
 ## Kubernetes Concepts Used
 * [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/) - Pods represent the smallest deployable units in a Kubernetes cluster and are used to group containers that must be treated as a single unit.
 * [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) - A deployment is a Kubernetes resource where you specify your containers and other Kubernetes resources that are required to run your app, such as persistent storage, services, or annotations.
-* [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/) - A Kubernetes service groups a set of pods and provides network connection to these pods for other services in the cluster without exposing the actual private IP address of each pod. 
+* [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/) - A Kubernetes service groups a set of pods and provides network connection to these pods for other services in the cluster without exposing the actual private IP address of each pod.
 * [Kubernetes Persistent Volumes (PV)](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) - PersistentVolumes are a way for users to *claim* durable storage such as NFS file storage.
 * [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) - Objects of type *secret* are intended to hold sensitive information, such as passwords, OAuth tokens, and ssh keys.
 
@@ -161,12 +161,12 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     ```
     $ bx cs clusters
     OK
-    Name        ID                                 State    Created          Workers   Datacenter   Version   
+    Name        ID                                 State    Created          Workers   Datacenter   Version
     mycluster   8xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx5   normal   34 minutes ago   1         hou02        1.7.4_1503
-    
+
     $ bx cs workers mycluster
     OK
-    ID                                                 Public IP        Private IP     Machine Type   State    Status   Version   
+    ID                                                 Public IP        Private IP     Machine Type   State    Status   Version
     kube-hou02-pxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-w1   17x.xxx.xx.xxx   10.47.64.200   free           normal   Ready    1.7.4_1503
     ```
 
@@ -212,7 +212,7 @@ $ ls
 
 ### 2.2 Save desired OrientDB password in Kubernetes secret
 Create a new file called password.txt in the same directory and put your desired OrientDB password inside password.txt (Could be any string with ASCII characters).
- 
+
 We need to make sure password.txt does not have any trailing newline. Use the following command to remove possible newlines.
 ```
 $ tr -d '\n' <password.txt >.strippedpassword.txt && mv .strippedpassword.txt password.txt
@@ -224,7 +224,7 @@ $ kubectl create secret generic orientdb-pass --from-file=password.txt
 secret "orientdb-pass" created
 ```
 
-### 2.3 Configure persistent storage for OrientDB volumes    
+### 2.3 Configure persistent storage for OrientDB volumes
 [OrientDB docker image](https://hub.docker.com/_/orientdb/) requires following directories to be volume mounted so as to persist data across container delete/relaunch.
 ```
 /orientdb/databases
@@ -253,7 +253,7 @@ spec:
 
 In case you are using Bluemix *lite* Kubernetes cluster, where NFS file storage is not supported, you can instead use [hostPath PersistentVolume](https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume). A hostPath PersistentVolume uses a file or directory on the Node to emulate network-attached storage. To create a hostPath PersistentVolume, review [local-volumes.yaml](local-volumes.yaml) and run `kubectl apply` command.
 ```
-$ cat local-volumes.yaml 
+$ cat local-volumes.yaml
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -351,7 +351,7 @@ spec:
     name: http
 ```
 
-### 2.5 View a local version of the Kubernetes dashboard.  
+### 2.5 View a local version of the Kubernetes dashboard.
 Launch your Kubernetes dashboard with the default port 8001.
 ```
 $ kubectl proxy
@@ -389,14 +389,14 @@ Get the public IP address for the worker node in the cluster.
 ```
 $ bx cs workers mycluster
 OK
-ID                                                 Public IP        Private IP     Machine Type   State    Status   Version   
-kube-hou02-pa85736d86a8f24324806f9b83d24960e5-w1   173.xxx.xx.xxx   10.47.64.200   free           normal   Ready    1.7.4_1502   
+ID                                                 Public IP        Private IP     Machine Type   State    Status   Version
+kube-hou02-pa85736d86a8f24324806f9b83d24960e5-w1   173.xxx.xx.xxx   10.47.64.200   free           normal   Ready    1.7.4_1502
 ```
 
 Open a browser and check out the OrientDB dashboard with the following URL.
 ```
 http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html#/
-```    
+```
 ![OrientDB Dashboard](doc/source/images/OrientDB-dashboard.png "OrientDB Dashboard")
 
 ## Step 3. Import a public database and explore it using OrientDB Dashboard and Gremlin console
@@ -406,9 +406,9 @@ http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html#/
   * In the OrientDB dashboard, click on the cloud import button (next to *New DB*).
   * Specify username (root) and password (same as the value specified in password.txt).
   * Scroll down to *MovieRatings* database and click on download button.
-    
+
     This will import a database containing Movies classified by Genre and Ratings by Users, created by MovieLens (movielens.org).
-    
+
     Once import is successful, you will be taken back to login screen.
 
 ### 3.2 Explore schema and data (vertices/edges) using OrientDB dashboard
@@ -436,9 +436,9 @@ http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html#/
       <img src="doc/source/images/DisplayingGraphEdges.png" alt="How to display graph edges" width="240" border="10" />
 
       All the movies rated by this user will be shown.
-    
+
     * Click on any of the movie vertices. Under *Settings*, next to *Display*, select *title*.
-      
+
       This will show the movie title below each of the *Movie* vertices as shown in the snapshot below.
       ![OrientDB Graph Editor](doc/source/images/OrientDB-GraphEditor.png "OrientDB Graph Editor")
 
@@ -484,7 +484,7 @@ http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html#/
     Installing extensions for GREMLIN language v.2.6.0
 
     orientdb> CONNECT remote:localhost/MovieRatings root
-    Enter password: 
+    Enter password:
 
     Connecting to database [remote:localhost/MovieRatings] with user 'root'...OK
     orientdb {db=MovieRatings}> select OUT("rated").title as MovieRated from Users where id = 1 UNWIND MovieRated;
@@ -517,10 +517,10 @@ http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html#/
 
     20 item(s) found. Query executed in 0.013 sec(s).
     orientdb {db=MovieRatings}> quit
-    $ 
+    $
     ```
     Note: Replace the name after `kubectl exec -it` with the name of the pod on which OrientDB is running as obtained by `kubectl get pods` command.
-    
+
     The [OrientDB select query](http://orientdb.com/docs/2.2.x/SQL-Query.html) that was run above displays the movies rated by a specified user (with id = 1).
 
 # Troubleshooting
