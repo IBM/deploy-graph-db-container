@@ -2,7 +2,7 @@
 
 *Read this in other languages: [한국어](README-ko.md).*
 
-[Graph databases](https://en.wikipedia.org/wiki/Graph_database), such as [OrientDB](https://github.com/orientechnologies/orientdb), store data in a graph structure consisting of nodes, edges and properties. Graph databases, by design, allow simple and fast retrieval of complex hierarchical structures in a much more efficient manner than relational databases. [Gremlin](http://tinkerpop.apache.org/gremlin.html) is a standardised graph traversal language for retrieving data from graph databases (the way SQL is for RDBMS).
+[Graph databases](https://en.wikipedia.org/wiki/Graph_database), such as [OrientDB](https://github.com/orientechnologies/orientdb), store data in a graph structure consisting of nodes, edges and properties. Graph databases, by design, allow simple and fast retrieval of complex hierarchical structures in a much more efficient manner than relational databases. [Gremlin](https://tinkerpop.apache.org/gremlin.html) is a standardised graph traversal language for retrieving data from graph databases (the way SQL is for RDBMS).
 
 In this journey we show you how to quickly deploy OrientDB on Bluemix Container Service, so that you can leverage it for your team's development and test purposes.
 
@@ -27,7 +27,7 @@ This journey gives you step by step instructions for:
 
 ## Watch the Overview Video
 
-[![](http://img.youtube.com/vi/bG3xynJs0T8/0.jpg)](https://youtu.be/bG3xynJs0T8)
+[![](https://img.youtube.com/vi/bG3xynJs0T8/0.jpg)](https://youtu.be/bG3xynJs0T8)
 
 ## Kubernetes Concepts Used
 * [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/) - Pods represent the smallest deployable units in a Kubernetes cluster and are used to group containers that must be treated as a single unit.
@@ -37,9 +37,9 @@ This journey gives you step by step instructions for:
 * [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) - Objects of type *secret* are intended to hold sensitive information, such as passwords, OAuth tokens, and ssh keys.
 
 ## Included Components
-* [Bluemix Container Service](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov) IBM Bluemix Container Service manages highly available apps inside Docker containers and Kubernetes clusters on the IBM Cloud.
-<!-- * [Bluemix Kubernetes Clusters](https://console.ng.bluemix.net/catalog/?taxonomyNavigation=apps&category=containers) - A Kubernetes cluster consists of one or more virtual machines, called worker nodes, where you can deploy, run and manage containerized apps.
-* [Bluemix DevOps Toolchain Service](https://console.ng.bluemix.net/catalog/services/continuous-delivery) - Bluemix DevOps toolchains automate the building and deployment of applications. -->
+* [Bluemix Container Service](https://console.bluemix.net/docs/containers/cs_ov.html#cs_ov) IBM Bluemix Container Service manages highly available apps inside Docker containers and Kubernetes clusters on the IBM Cloud.
+<!-- * [Bluemix Kubernetes Clusters](https://console.bluemix.net/catalog/?taxonomyNavigation=apps&category=containers) - A Kubernetes cluster consists of one or more virtual machines, called worker nodes, where you can deploy, run and manage containerized apps.
+* [Bluemix DevOps Toolchain Service](https://console.bluemix.net/catalog/services/continuous-delivery) - Bluemix DevOps toolchains automate the building and deployment of applications. -->
 * [OrientDB](https://github.com/orientechnologies/orientdb) - OrientDB is an Open Source Multi-Model NoSQL DBMS with support for Native Graphs.
 
 ## Steps
@@ -234,7 +234,7 @@ secret "orientdb-pass" created
 /orientdb/backup
 ```
 
-If you are using Bluemix *standard* Kubernetes cluster, then you can leverage [dynamic volume provisioning](http://blog.kubernetes.io/2016/10/dynamic-provisioning-and-storage-in-kubernetes.html) which allows storage volumes to be created on-demand. To use this feature, update the value of `volume.beta.kubernetes.io/storage-class` annotation in `orientdb.yaml` to one of the [NFS file-based storage classes supported in Bluemix](https://console.bluemix.net/docs/containers/cs_apps.html#cs_apps_volume_claim): `ibmc-file-bronze` or `ibmc-file-silver` or `ibmc-file-gold`. Also change `accessModes` to `ReadWriteMany` and increase storage request to say 20GB.
+If you are using Bluemix *standard* Kubernetes cluster, then you can leverage [dynamic volume provisioning](https://kubernetes.io/blog/2016/10/dynamic-provisioning-and-storage-in-kubernetes/) which allows storage volumes to be created on-demand. To use this feature, update the value of `volume.beta.kubernetes.io/storage-class` annotation in `orientdb.yaml` to one of the [NFS file-based storage classes supported in Bluemix](https://console.bluemix.net/docs/containers/cs_apps.html#cs_apps_volume_claim): `ibmc-file-bronze` or `ibmc-file-silver` or `ibmc-file-gold`. Also change `accessModes` to `ReadWriteMany` and increase storage request to say 20GB.
 ```
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -447,7 +447,7 @@ http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html#/
 
 ### 3.3 Open Gremlin/OrientDB console and run queries
 
-  * Kubernetes allows us to [get a shell to a running container](https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/). We can use this feature to open [OrientDB's Gremlin console](https://orientdb.com/docs/2.2/Gremlin.html) as shown below.
+  * Kubernetes allows us to [get a shell to a running container](https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/). We can use this feature to open [OrientDB's Gremlin console](https://orientdb.com/docs/2.2.x/Gremlin.html) as shown below.
     ```
     $ kubectl get pods
     NAME                               READY     STATUS    RESTARTS   AGE
@@ -478,7 +478,7 @@ http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html#/
     gremlin> exit
     ```
 
-  * We can similarly open OrientDB console and run [OrientDB commands](http://orientdb.com/docs/2.2.x/Console-Commands.html) as shown below.
+  * We can similarly open OrientDB console and run [OrientDB commands](https://orientdb.com/docs/2.2.x/Console-Commands.html) as shown below.
     ```
     $ kubectl exec -it orientdbservice-2043245721-81524  -- /orientdb/bin/console.sh
 
@@ -524,7 +524,7 @@ http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html#/
     ```
     Note: Replace the name after `kubectl exec -it` with the name of the pod on which OrientDB is running as obtained by `kubectl get pods` command.
 
-    The [OrientDB select query](http://orientdb.com/docs/2.2.x/SQL-Query.html) that was run above displays the movies rated by a specified user (with id = 1).
+    The [OrientDB select query](https://orientdb.com/docs/2.2.x/SQL-Query.html) that was run above displays the movies rated by a specified user (with id = 1).
 
 # Troubleshooting
 
@@ -567,9 +567,9 @@ http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html#/
     ```
 
 # References
-* [MovieLens recommendation engine with OrientDB](http://pizzaconnections.net/2015/03/27/148/) based on Marko Rodriguez’s elegant article on [Graph-Based Movie Recommender Engine](https://markorodriguez.com/2011/09/22/a-graph-based-movie-recommender-engine/)
+* MovieLens recommendation engine with OrientDB (originally at `http://pizzaconnections.net/2015/03/27/148/`) based on Marko Rodriguez’s elegant article on [Graph-Based Movie Recommender Engine](https://markorodriguez.com/2011/09/22/a-graph-based-movie-recommender-engine/)
 
 # License
-This code pattern is licensed under the Apache Software License, Version 2.  Separate third party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1 (DCO)](https://developercertificate.org/) and the [Apache Software License, Version 2](http://www.apache.org/licenses/LICENSE-2.0.txt).
+This code pattern is licensed under the Apache Software License, Version 2.  Separate third party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1 (DCO)](https://developercertificate.org/) and the [Apache Software License, Version 2](https://www.apache.org/licenses/LICENSE-2.0.txt).
 
-[Apache Software License (ASL) FAQ](http://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN)
+[Apache Software License (ASL) FAQ](https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN)
