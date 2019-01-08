@@ -6,7 +6,7 @@
 
 이 과정에서는 Bluemix 컨테이너 서비스에 OrientDB를 배포하는 방법을 보여주어 이를 개발이나 테스트 목적으로 활용할 수 있도록 합니다.
 
-[IBM Bluemix 컨테이너 서비스](https://console.bluemix.net/docs/containers/cs_ov.html#cs_ov)는 [도커(Docker)](https://docs.docker.com/get-started/)와 [쿠버네티스(Kubernetes)](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)가 조합된 형태로서 쿠버네티스 API를 사용하여 독립 컴퓨트 호스트로 구성된 클러스터에서 컨테이너화된 애플리케이션의 자동화된 배포, 운영, 확장 및 모니터링이 가능한 강력한 도구를 제공합니다.
+[IBM Bluemix 컨테이너 서비스](https://cloud.ibm.com/docs/containers/cs_ov.html#cs_ov)는 [도커(Docker)](https://docs.docker.com/get-started/)와 [쿠버네티스(Kubernetes)](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)가 조합된 형태로서 쿠버네티스 API를 사용하여 독립 컴퓨트 호스트로 구성된 클러스터에서 컨테이너화된 애플리케이션의 자동화된 배포, 운영, 확장 및 모니터링이 가능한 강력한 도구를 제공합니다.
 
 이 과정은 다음과 같은 단계를 제공합니다:
 * Bluemix 쿠버네티스에 OrientDB 컨테이너 배포
@@ -37,9 +37,9 @@
 * [Kubernetes Secret](https://kubernetes.io/docs/concepts/configuration/secret/) - *secret* 타입의 오브젝트는 비밀번호나 OAuth 토큰이나 ssh 키와 같은 민감한 정보를 저장합니다.
 
 ## 포함된 구성 요소
-* [Bluemix 컨테이너 서비스](https://console.ng.bluemix.net/docs/containers/cs_ov.html#cs_ov) IBM Bluemix 컨테이너 서비스는 IBM Cloud에서 실행되는 Docker 컨테이너와 쿠버네티스 클러스터 내부에서 고가용성 애플리케이션을 관리합니다.
-<!-- * [Bluemix 쿠버네티스 클러스터](https://console.ng.bluemix.net/catalog/?taxonomyNavigation=apps&category=containers) - 쿠버네티스 클러스터는 컨테이너화 된 애플리케이션을 배포하고 실행하고 관리할 수 있는 하나 이상의 가상 머신(worker 노드라 불림)으로 구성되어 있습니다.
-* [Bluemix DevOps 툴체인 서비스](https://console.ng.bluemix.net/catalog/services/continuous-delivery) - Bluemix DevOps 툴체인 서비스는 애플리케이션의 빌드 및 배포를 자동화 합니다. -->
+* [Bluemix 컨테이너 서비스](https://cloud.ibm.com/docs/containers/cs_ov.html#cs_ov) IBM Bluemix 컨테이너 서비스는 IBM Cloud에서 실행되는 Docker 컨테이너와 쿠버네티스 클러스터 내부에서 고가용성 애플리케이션을 관리합니다.
+<!-- * [Bluemix 쿠버네티스 클러스터](https://cloud.ibm.com/catalog/?taxonomyNavigation=apps&category=containers) - 쿠버네티스 클러스터는 컨테이너화 된 애플리케이션을 배포하고 실행하고 관리할 수 있는 하나 이상의 가상 머신(worker 노드라 불림)으로 구성되어 있습니다.
+* [Bluemix DevOps 툴체인 서비스](https://cloud.ibm.com/catalog/services/continuous-delivery) - Bluemix DevOps 툴체인 서비스는 애플리케이션의 빌드 및 배포를 자동화 합니다. -->
 * [OrientDB](https://github.com/orientechnologies/orientdb) - OrientDB는 네이티브 그래프(Native Graph)를 지원하는 오픈 소스 다중-모델 NoSQL DBMS입니다.
 
 ## 단계
@@ -66,7 +66,7 @@
 
 ### 1.1 Bluemix와 쿠버네티스용 CLI 설치하기
 
-https://console.bluemix.net/docs/containers/cs_tutorials.html#cs_cluster_tutorial 에 있는 지침에 따라 Bluemix 및 쿠버네티스 CLI를 설정하십시오. 이 단계를 다시 한 번 빠르게 훑어 보겠습니다.
+https://cloud.ibm.com/docs/containers/cs_tutorials.html#cs_cluster_tutorial 에 있는 지침에 따라 Bluemix 및 쿠버네티스 CLI를 설정하십시오. 이 단계를 다시 한 번 빠르게 훑어 보겠습니다.
 
   * https://clis.ng.bluemix.net/ui/home.html 에 있는 지침에 따라 Bluemix CLI를 다운로드 하고 설치하십시오. Bluemix CLI는 Bluemix 애플리케이션, 컨테이너, 인프라스트럭쳐, 서비스 및 기타 자원을 관리하는 명령 줄 인터페이스(Command Line Interface)를 제공합니다. Bluemix CLI가 사용하는 명령 실행 접두어는 `bx` 입니다.
   
@@ -144,9 +144,9 @@ https://console.bluemix.net/docs/containers/cs_tutorials.html#cs_cluster_tutoria
 
 Bluemix는 2 CPU, 4 GB 메모리 그리고 1개의 worker 노드를 가진 무료 클러스터를 제공합니다. _lite cluster_ 라 불리는 것으로, 쿠버네티스 기능을 익숙하게 하고 확인해 볼 수 있도록 합니다. 그렇긴 하지만 volume을 가진 NFS 파일 기반 저장소와 같은 몇 가지 기능은 빠져 있습니다.
 
-Bluemix는 최대 가용치 및 용량으로 클러스터 설정을 위해 완벽하게 커스터마이즈 가능하며 운영 환경에 대응 할 수 있는 _standard cluster_ 를 제공합니다. _standard clusters_ 는 여러 개의 worker를 갖는 서로 다른 지역의 두 개의 클러스터 구성과 같은 고가용성 클러스터 설정이 가능합니다. https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning_cluster_config 를 확인하여 고가용성 클러스터 구성에 대한 옵션을 확인하십시오.
+Bluemix는 최대 가용치 및 용량으로 클러스터 설정을 위해 완벽하게 커스터마이즈 가능하며 운영 환경에 대응 할 수 있는 _standard cluster_ 를 제공합니다. _standard clusters_ 는 여러 개의 worker를 갖는 서로 다른 지역의 두 개의 클러스터 구성과 같은 고가용성 클러스터 설정이 가능합니다. https://cloud.ibm.com/docs/containers/cs_planning.html#cs_planning_cluster_config 를 확인하여 고가용성 클러스터 구성에 대한 옵션을 확인하십시오.
 
-_lite_ 와 _standard_ 에 대한 상세 비교는 https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning 에서 확인하십시오.
+_lite_ 와 _standard_ 에 대한 상세 비교는 https://cloud.ibm.com/docs/containers/cs_planning.html#cs_planning 에서 확인하십시오.
 
   * 쿠버네티스 클러스터를 생성하십시오.
     ```
@@ -158,7 +158,7 @@ _lite_ 와 _standard_ 에 대한 상세 비교는 https://console.bluemix.net/do
     ```
     참고: worker 노드 머신이 주문되고 클러스터가 구성되어 프로비젼 되기까지 최대 15분 정도가 소요될 수 있습니다.
 
-    standard 클러스터 구성을 원하는 경우, https://console.bluemix.net/docs/containers/cs_cluster.html#cs_cluster_cli 에서 구성 지침을 확인 할 수 있습니다.
+    standard 클러스터 구성을 원하는 경우, https://cloud.ibm.com/docs/containers/cs_cluster.html#cs_cluster_cli 에서 구성 지침을 확인 할 수 있습니다.
 
   * worker 노드의 배포가 완료되었는지 확인하십시오.
     ```
@@ -234,7 +234,7 @@ secret "orientdb-pass" created
 /orientdb/backup
 ```
 
-Bluemix *standard* 쿠버네티스 클러스터를 사용하고 있는 경우, 필요에 따라(on-demand) 저장소 volume을 생성 할 수 있는 [dynamic volume provisioning](http://blog.kubernetes.io/2016/10/dynamic-provisioning-and-storage-in-kubernetes.html)을 활용 할 수 있습니다. 이 기능을 사용하려면, `orientdb.yaml`에 있는 `volume.beta.kubernetes.io/storage-class` annotation 값을 [Bluemix에서 지원하는 NFS 파일 기반 저장소 클래스](https://console.bluemix.net/docs/containers/cs_apps.html#cs_apps_volume_claim) 중 하나로 변경하십시오: `ibmc-file-bronze`, `ibmc-file-silver`, `ibmc-file-gold`. 또한, `accessModes`를 `ReadWriteMany`로 변경하고 저장소 요청을 20GB로 증가시키십시오.
+Bluemix *standard* 쿠버네티스 클러스터를 사용하고 있는 경우, 필요에 따라(on-demand) 저장소 volume을 생성 할 수 있는 [dynamic volume provisioning](http://blog.kubernetes.io/2016/10/dynamic-provisioning-and-storage-in-kubernetes.html)을 활용 할 수 있습니다. 이 기능을 사용하려면, `orientdb.yaml`에 있는 `volume.beta.kubernetes.io/storage-class` annotation 값을 [Bluemix에서 지원하는 NFS 파일 기반 저장소 클래스](https://cloud.ibm.com/docs/containers/cs_apps.html#cs_apps_volume_claim) 중 하나로 변경하십시오: `ibmc-file-bronze`, `ibmc-file-silver`, `ibmc-file-gold`. 또한, `accessModes`를 `ReadWriteMany`로 변경하고 저장소 요청을 20GB로 증가시키십시오.
 ```
 kind: PersistentVolumeClaim
 apiVersion: v1
