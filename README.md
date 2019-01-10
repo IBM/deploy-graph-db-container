@@ -38,7 +38,7 @@ This journey gives you step by step instructions for:
 
 ## Included Components
 * [Bluemix Container Service](https://cloud.ibm.com/docs/containers/cs_ov.html#cs_ov) IBM Bluemix Container Service manages highly available apps inside Docker containers and Kubernetes clusters on the IBM Cloud.
-<!-- * [Bluemix Kubernetes Clusters](https://cloud.ibm.com/catalog/?taxonomyNavigation=apps&category=containers) - A Kubernetes cluster consists of one or more virtual machines, called worker nodes, where you can deploy, run and manage containerized apps.
+<!-- * [Bluemix Kubernetes Clusters](https://cloud.ibm.com/catalog?taxonomyNavigation=apps&category=containers) - A Kubernetes cluster consists of one or more virtual machines, called worker nodes, where you can deploy, run and manage containerized apps.
 * [Bluemix DevOps Toolchain Service](https://cloud.ibm.com/catalog/services/continuous-delivery) - Bluemix DevOps toolchains automate the building and deployment of applications. -->
 * [OrientDB](https://github.com/orientechnologies/orientdb) - OrientDB is an Open Source Multi-Model NoSQL DBMS with support for Native Graphs.
 
