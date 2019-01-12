@@ -72,7 +72,7 @@ Set up Bluemix and Kubernetes CLI as per instructions in https://cloud.ibm.com/d
 
   * Install the IBM Bluemix Container Service plug-in, which allows you to create Kubernetes clusters and manage worker nodes. The prefix for running commands by using the IBM Bluemix Container Service plug-in is `bx cs`.
     ```
-    $ bx plugin install container-service -r Bluemix
+    $ ibmcloud plugin install container-service -r Bluemix
     ```
 
   * Install Kubernetes CLI. This allows you to deploy apps into your Kubernetes clusters and to view a local version of the Kubernetes dashboard. The prefix for running commands by using the Kubernetes CLI is `kubectl`.
@@ -95,49 +95,49 @@ Set up Bluemix and Kubernetes CLI as per instructions in https://cloud.ibm.com/d
 
   * Log in to the Bluemix CLI. Enter your Bluemix credentials when prompted.
     ```
-    $ bx login -a api.ng.bluemix.net
-    $ bx target --cf
+    $ ibmcloud login -a api.ng.bluemix.net
+    $ ibmcloud target --cf
     ```
     The API endpoint for various Bluemix regions is given below. If you have private Docker images that are stored in the container registry of a specific Bluemix region, or Bluemix services instances that you have already created, log in to this region to access your images and Bluemix services. The Bluemix region that you log in to also determines the region where you can create your Kubernetes clusters, including the available datacenters.
 
     - US South
         ```
-        $ bx login -a api.ng.bluemix.net
+        $ ibmcloud login -a api.ng.bluemix.net
         ```
     - United Kingdom
         ```
-        $ bx login -a api.eu-gb.bluemix.net
+        $ ibmcloud login -a api.eu-gb.bluemix.net
         ```
     - Germany
         ```
-        $ bx login -a api.eu-de.bluemix.net
+        $ ibmcloud login -a api.eu-de.bluemix.net
         ```
     - Sydney
         ```
-        $ bx login -a api.au-syd.bluemix.net
+        $ ibmcloud login -a api.au-syd.bluemix.net
         ```
 
   * Initialize the IBM Bluemix Container Service plugin
     ```
-    $ bx cs init
+    $ ibmcloud cs init
     ```
     If you want to create a Kubernetes cluster in a region other than the Bluemix region that you selected earlier, specify this region.
 
     - US South
       ```
-      $ bx cs init --host https://us-south.containers.bluemix.net
+      $ ibmcloud cs init --host https://us-south.containers.bluemix.net
       ```
     - UK-South
       ```
-      $ bx cs init --host https://uk-south.containers.bluemix.net
+      $ ibmcloud cs init --host https://uk-south.containers.bluemix.net
       ```
     - EU-Central
       ```
-      $ bx cs init --host https://eu-central.containers.bluemix.net
+      $ ibmcloud cs init --host https://eu-central.containers.bluemix.net
       ```
     - AP-South
       ```
-      $ bx cs init --host https://ap-south.containers.bluemix.net
+      $ ibmcloud cs init --host https://ap-south.containers.bluemix.net
       ```
 
 ### 1.3 Create your Bluemix Kubernetes cluster
@@ -150,7 +150,7 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
 
   * Create your lite Kubernetes cluster.
     ```
-    $ bx cs cluster-create --name mycluster
+    $ ibmcloud cs cluster-create --name mycluster
     Creating cluster...
     The machine-type flag was not specified. So a free cluster will be created
     Number of workers was not specified, using default: 1.
@@ -162,12 +162,12 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
 
   * Verify that the deployment of your worker node is complete.
     ```
-    $ bx cs clusters
+    $ ibmcloud cs clusters
     OK
     Name        ID                                 State    Created          Workers   Datacenter   Version
     mycluster   8xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx5   normal   34 minutes ago   1         hou02        1.7.4_1503
 
-    $ bx cs workers mycluster
+    $ ibmcloud cs workers mycluster
     OK
     ID                                                 Public IP        Private IP     Machine Type   State    Status   Version
     kube-hou02-pxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-w1   17x.xxx.xx.xxx   10.47.64.200   free           normal   Ready    1.7.4_1503
@@ -179,7 +179,7 @@ Configure your Kubernetes CLI environment to point to your Bluemix Kubernetes cl
 
   * Download the Kubernetes configuration files and get the command to set the environment variable
     ```
-    $ bx cs cluster-config mycluster
+    $ ibmcloud cs cluster-config mycluster
     OK
     The configuration for mycluster was downloaded successfully. Export environment variables to start using Kubernetes.
 
@@ -391,7 +391,7 @@ Events:			<none>
 
 Get the public IP address for the worker node in the cluster.
 ```
-$ bx cs workers mycluster
+$ ibmcloud cs workers mycluster
 OK
 ID                                                 Public IP        Private IP     Machine Type   State    Status   Version
 kube-hou02-pa85736d86a8f24324806f9b83d24960e5-w1   173.xxx.xx.xxx   10.47.64.200   free           normal   Ready    1.7.4_1502
@@ -561,7 +561,7 @@ http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html#/
     ```
 * If you want to delete your Bluemix Kubernetes cluster, then run the following command.
     ```
-    $ bx cs cluster-rm mycluster
+    $ ibmcloud cs cluster-rm mycluster
     Remove the cluster? [mycluster] (Y/N)> Y
     Removing cluster mycluster...
     OK
