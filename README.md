@@ -42,11 +42,11 @@ This journey gives you step by step instructions for:
 * [OrientDB](https://github.com/orientechnologies/orientdb) - OrientDB is an Open Source Multi-Model NoSQL DBMS with support for Native Graphs.
 
 ## Steps
-1. [Setup IBM Cloud Kubernetes Cluster](#step-1-setup-bluemix-kubernetes-cluster)
-  - 1.1 [Install CLI for IBM Cloud and Kubernetes](#11-install-cli-for-bluemix-and-kubernetes)
-  - 1.2 [Log in to the IBM Cloud CLI and initialize IBM Cloud Container Service plugin](#12-log-in-to-the-bluemix-cli-and-initialize-bluemix-container-service-plugin)
-  - 1.3 [Create your IBM Cloud Kubernetes cluster](#13-create-your-bluemix-kubernetes-cluster)
-  - 1.4 [Point the Kubernetes CLI to your IBM Cloud Kubernetes cluster](#14-point-the-kubernetes-cli-to-your-bluemix-kubernetes-cluster)
+1. [Setup IBM Cloud Kubernetes Cluster](#step-1-setup-ibm-cloud-kubernetes-cluster)
+  - 1.1 [Install CLI for IBM Cloud and Kubernetes](#11-install-cli-for-ibm-cloud-and-kubernetes)
+  - 1.2 [Log in to the IBM Cloud CLI and initialize IBM Cloud Container Service plugin](#12-log-in-to-the-ibm-cloud-cli-and-initialize-ibm-cloud-container-service-plugin)
+  - 1.3 [Create your IBM Cloud Kubernetes cluster](#13-create-your-ibm-cloud-kubernetes-cluster)
+  - 1.4 [Point the Kubernetes CLI to your IBM Cloud Kubernetes cluster](#14-point-the-kubernetes-cli-to-your-ibm-cloud-kubernetes-cluster)
 2. [Deploy OrientDB service into Kubernetes clusters](#step-2-deploy-orientdb-service-into-kubernetes-clusters)
   - 2.1 [Copy OrientDB Kubernetes configuration scripts](#21-copy-orientdb-kubernetes-configuration-scripts)
   - 2.2 [Save desired OrientDB password in Kubernetes secret](#22-save-desired-orientdb-password-in-kubernetes-secret)
