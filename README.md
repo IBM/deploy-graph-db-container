@@ -1,15 +1,14 @@
-# Deploy OrientDB container on Bluemix Kubernetes
+# Deploy OrientDB container on IBM Cloud Kubernetes
 
 *Read this in other languages: [한국어](README-ko.md).*
 
 [Graph databases](https://en.wikipedia.org/wiki/Graph_database), such as [OrientDB](https://github.com/orientechnologies/orientdb), store data in a graph structure consisting of nodes, edges and properties. Graph databases, by design, allow simple and fast retrieval of complex hierarchical structures in a much more efficient manner than relational databases. [Gremlin](https://tinkerpop.apache.org/gremlin.html) is a standardised graph traversal language for retrieving data from graph databases (the way SQL is for RDBMS).
 
-In this journey we show you how to quickly deploy OrientDB on Bluemix Container Service, so that you can leverage it for your team's development and test purposes.
-
-[IBM Bluemix Container Service](https://cloud.ibm.com/docs/containers/cs_ov.html#cs_ov) combines [Docker](https://docs.docker.com/get-started/) and [Kubernetes](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/) to deliver powerful tools to automate the deployment, operation, scaling, and monitoring of containerized apps over a cluster of independent compute hosts by using the Kubernetes APIs.
+In this journey we show you how to quickly deploy OrientDB on IBM Cloud Container Service, so that you can leverage it for your team's development and test purposes.
+[IBM Cloud Container Service](https://cloud.ibm.com/docs/containers/cs_ov.html#cs_ov) combines [Docker](https://docs.docker.com/get-started/) and [Kubernetes](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/) to deliver powerful tools to automate the deployment, operation, scaling, and monitoring of containerized apps over a cluster of independent compute hosts by using the Kubernetes APIs.
 
 This journey gives you step by step instructions for:
-* Deploying OrientDB container on Bluemix Kubernetes.
+* Deploying OrientDB container on IBM Cloud Kubernetes.
 * Storing the desired OrientDB password in Kubernetes secret.
 * Configuring the persistent storage for OrientDB volumes by making use of Kubernetes persistent volume claim.
 * Opening the deployed OrientDB's console as well as Gremlin console by making use of Kubernetes feature of getting a shell to a running container.
@@ -18,8 +17,8 @@ This journey gives you step by step instructions for:
 
 <img src="doc/source/images/architecture.png" alt="architecture/Flow diagram" width="640" border="10" />
 
-1. Log in to Bluemix CLI and initialize Bluemix Container Service plugin.
-2. Set context for Kubernetes CLI by downloading Bluemix Kubernetes configuration files and setting KUBECONFIG environment variable.
+1. Log in to IBM Cloud CLI and initialize IBM Cloud Container Service plugin.
+2. Set context for Kubernetes CLI by downloading IBM Cloud Kubernetes configuration files and setting KUBECONFIG environment variable.
 3. Save desired OrientDB password in Kubernetes secret.
 4. Configure persistent storage for OrientDB volumes.
 5. Deploy OrientDB container and NodePort service to Kubernetes cluster.
@@ -37,17 +36,17 @@ This journey gives you step by step instructions for:
 * [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) - Objects of type *secret* are intended to hold sensitive information, such as passwords, OAuth tokens, and ssh keys.
 
 ## Included Components
-* [Bluemix Container Service](https://cloud.ibm.com/docs/containers/cs_ov.html#cs_ov) IBM Bluemix Container Service manages highly available apps inside Docker containers and Kubernetes clusters on the IBM Cloud.
-<!-- * [Bluemix Kubernetes Clusters](https://cloud.ibm.com/catalog?taxonomyNavigation=apps&category=containers) - A Kubernetes cluster consists of one or more virtual machines, called worker nodes, where you can deploy, run and manage containerized apps.
-* [Bluemix DevOps Toolchain Service](https://cloud.ibm.com/catalog/services/continuous-delivery) - Bluemix DevOps toolchains automate the building and deployment of applications. -->
+* [IBM Cloud Container Service](https://cloud.ibm.com/docs/containers/cs_ov.html#cs_ov) IBM Cloud Container Service manages highly available apps inside Docker containers and Kubernetes clusters on the IBM Cloud.
+<!-- * [IBM Cloud Kubernetes Clusters](https://cloud.ibm.com/catalog?taxonomyNavigation=apps&category=containers) - A Kubernetes cluster consists of one or more virtual machines, called worker nodes, where you can deploy, run and manage containerized apps.
+* [IBM Cloud DevOps Toolchain Service](https://cloud.ibm.com/catalog/services/continuous-delivery) - IBM Cloud DevOps toolchains automate the building and deployment of applications. -->
 * [OrientDB](https://github.com/orientechnologies/orientdb) - OrientDB is an Open Source Multi-Model NoSQL DBMS with support for Native Graphs.
 
 ## Steps
-1. [Setup Bluemix Kubernetes Cluster](#step-1-setup-bluemix-kubernetes-cluster)
-  - 1.1 [Install CLI for Bluemix and Kubernetes](#11-install-cli-for-bluemix-and-kubernetes)
-  - 1.2 [Log in to the Bluemix CLI and initialize Bluemix Container Service plugin](#12-log-in-to-the-bluemix-cli-and-initialize-bluemix-container-service-plugin)
-  - 1.3 [Create your Bluemix Kubernetes cluster](#13-create-your-bluemix-kubernetes-cluster)
-  - 1.4 [Point the Kubernetes CLI to your Bluemix Kubernetes cluster](#14-point-the-kubernetes-cli-to-your-bluemix-kubernetes-cluster)
+1. [Setup IBM Cloud Kubernetes Cluster](#step-1-setup-bluemix-kubernetes-cluster)
+  - 1.1 [Install CLI for IBM Cloud and Kubernetes](#11-install-cli-for-bluemix-and-kubernetes)
+  - 1.2 [Log in to the IBM Cloud CLI and initialize IBM Cloud Container Service plugin](#12-log-in-to-the-bluemix-cli-and-initialize-bluemix-container-service-plugin)
+  - 1.3 [Create your IBM Cloud Kubernetes cluster](#13-create-your-bluemix-kubernetes-cluster)
+  - 1.4 [Point the Kubernetes CLI to your IBM Cloud Kubernetes cluster](#14-point-the-kubernetes-cli-to-your-bluemix-kubernetes-cluster)
 2. [Deploy OrientDB service into Kubernetes clusters](#step-2-deploy-orientdb-service-into-kubernetes-clusters)
   - 2.1 [Copy OrientDB Kubernetes configuration scripts](#21-copy-orientdb-kubernetes-configuration-scripts)
   - 2.2 [Save desired OrientDB password in Kubernetes secret](#22-save-desired-orientdb-password-in-kubernetes-secret)
@@ -62,17 +61,17 @@ This journey gives you step by step instructions for:
 
 [Troubleshooting](#troubleshooting)
 
-## Step 1. Setup Bluemix Kubernetes Cluster
+## Step 1. Setup IBM Cloud Kubernetes Cluster
 
-### 1.1 Install CLI for Bluemix and Kubernetes
+### 1.1 Install CLI for IBM Cloud and Kubernetes
 
-Set up Bluemix and Kubernetes CLI as per instructions in https://cloud.ibm.com/docs/containers/cs_tutorials.html#cs_cluster_tutorial. The steps are repeated here for quick reference.
+Set up IBM Cloud and Kubernetes CLI as per instructions in https://cloud.ibm.com/docs/containers/cs_tutorials.html#cs_cluster_tutorial. The steps are repeated here for quick reference.
 
-  * Download and Install Bluemix CLI as per instructions in https://clis.ng.bluemix.net/ui/home.html. Bluemix CLI provides the command line interface to manage applications, containers, infrastructures, services and other resources in Bluemix. The prefix for running commands by using the Bluemix CLI is `bx`.
+  * Download and Install IBM Cloud CLI as per instructions in https://clis.ng.bluemix.net/ui/home.html. IBM Cloud CLI provides the command line interface to manage applications, containers, infrastructures, services and other resources in IBM Cloud. The prefix for running commands by using the IBM Cloud CLI is `bx`.
 
-  * Install the IBM Bluemix Container Service plug-in, which allows you to create Kubernetes clusters and manage worker nodes. The prefix for running commands by using the IBM Bluemix Container Service plug-in is `bx cs`.
+  * Install the IBM Cloud Container Service plug-in, which allows you to create Kubernetes clusters and manage worker nodes. The prefix for running commands by using the IBM Cloud Container Service plug-in is `bx cs`.
     ```
-    $ ibmcloud plugin install container-service -r Bluemix
+    $ ibmcloud plugin install container-service
     ```
 
   * Install Kubernetes CLI. This allows you to deploy apps into your Kubernetes clusters and to view a local version of the Kubernetes dashboard. The prefix for running commands by using the Kubernetes CLI is `kubectl`.
@@ -91,14 +90,14 @@ Set up Bluemix and Kubernetes CLI as per instructions in https://cloud.ibm.com/d
         $ sudo mv ./kubectl /usr/local/bin/
         ```
 
-### 1.2 Log in to the Bluemix CLI and initialize Bluemix Container Service plugin
+### 1.2 Log in to the IBM Cloud CLI and initialize IBM Cloud Container Service plugin
 
-  * Log in to the Bluemix CLI. Enter your Bluemix credentials when prompted.
+  * Log in to the IBM Cloud CLI. Enter your IBM Cloud credentials when prompted.
     ```
     $ ibmcloud login -a api.ng.bluemix.net
     $ ibmcloud target --cf
     ```
-    The API endpoint for various Bluemix regions is given below. If you have private Docker images that are stored in the container registry of a specific Bluemix region, or Bluemix services instances that you have already created, log in to this region to access your images and Bluemix services. The Bluemix region that you log in to also determines the region where you can create your Kubernetes clusters, including the available datacenters.
+    The API endpoint for various IBM Cloud regions is given below. If you have private Docker images that are stored in the container registry of a specific IBM Cloud region, or IBM Cloud services instances that you have already created, log in to this region to access your images and IBM Cloud services. The IBM Cloud region that you log in to also determines the region where you can create your Kubernetes clusters, including the available datacenters.
 
     - US South
         ```
@@ -117,11 +116,11 @@ Set up Bluemix and Kubernetes CLI as per instructions in https://cloud.ibm.com/d
         $ ibmcloud login -a api.au-syd.bluemix.net
         ```
 
-  * Initialize the IBM Bluemix Container Service plugin
+  * Initialize the IBM Cloud Container Service plugin
     ```
     $ ibmcloud cs init
     ```
-    If you want to create a Kubernetes cluster in a region other than the Bluemix region that you selected earlier, specify this region.
+    If you want to create a Kubernetes cluster in a region other than the IBM Cloud region that you selected earlier, specify this region.
 
     - US South
       ```
@@ -140,11 +139,11 @@ Set up Bluemix and Kubernetes CLI as per instructions in https://cloud.ibm.com/d
       $ ibmcloud cs init --host https://ap-south.containers.bluemix.net
       ```
 
-### 1.3 Create your Bluemix Kubernetes cluster
+### 1.3 Create your IBM Cloud Kubernetes cluster
 
-Bluemix allows you to create a free cluster that comes with 2 CPUs, 4 GB memory, and 1 worker node. This is called _lite cluster_ and allows you to get familiar with and test Kubernetes capabilities. However they lack capabilities like persistent NFS file-based storage with volumes.
+IBM Cloud allows you to create a free cluster that comes with 2 CPUs, 4 GB memory, and 1 worker node. This is called _lite cluster_ and allows you to get familiar with and test Kubernetes capabilities. However they lack capabilities like persistent NFS file-based storage with volumes.
 
-To setup your cluster for maximum availability and capacity, Bluemix allows you to create a fully customizable, production-ready cluster called _standard cluster_. _Standard clusters_ allow highly available cluster configurations such as a setup with two clusters that run in different regions, each with multiple worker nodes. Please see https://cloud.ibm.com/docs/containers/cs_planning.html#cs_planning_cluster_config to review other options for highly available cluster configurations.
+To setup your cluster for maximum availability and capacity, IBM Cloud allows you to create a fully customizable, production-ready cluster called _standard cluster_. _Standard clusters_ allow highly available cluster configurations such as a setup with two clusters that run in different regions, each with multiple worker nodes. Please see https://cloud.ibm.com/docs/containers/cs_planning.html#cs_planning_cluster_config to review other options for highly available cluster configurations.
 
 A detailed comparison of capabilities of _lite_ and _standard_ clusters is given in https://cloud.ibm.com/docs/containers/cs_planning.html#cs_planning.
 
@@ -173,9 +172,9 @@ A detailed comparison of capabilities of _lite_ and _standard_ clusters is given
     kube-hou02-pxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-w1   17x.xxx.xx.xxx   10.47.64.200   free           normal   Ready    1.7.4_1503
     ```
 
-### 1.4 Point the Kubernetes CLI to your Bluemix Kubernetes cluster
+### 1.4 Point the Kubernetes CLI to your IBM Cloud Kubernetes cluster
 
-Configure your Kubernetes CLI environment to point to your Bluemix Kubernetes cluster as below.
+Configure your Kubernetes CLI environment to point to your IBM Cloud Kubernetes cluster as below.
 
   * Download the Kubernetes configuration files and get the command to set the environment variable
     ```
@@ -234,7 +233,7 @@ secret "orientdb-pass" created
 /orientdb/backup
 ```
 
-If you are using Bluemix *standard* Kubernetes cluster, then you can leverage [dynamic volume provisioning](https://kubernetes.io/blog/2016/10/dynamic-provisioning-and-storage-in-kubernetes/) which allows storage volumes to be created on-demand. To use this feature, update the value of `volume.beta.kubernetes.io/storage-class` annotation in `orientdb.yaml` to one of the [NFS file-based storage classes supported in Bluemix](https://cloud.ibm.com/docs/containers/cs_apps.html#cs_apps_volume_claim): `ibmc-file-bronze` or `ibmc-file-silver` or `ibmc-file-gold`. Also change `accessModes` to `ReadWriteMany` and increase storage request to say 20GB.
+If you are using IBM Cloud *standard* Kubernetes cluster, then you can leverage [dynamic volume provisioning](https://kubernetes.io/blog/2016/10/dynamic-provisioning-and-storage-in-kubernetes/) which allows storage volumes to be created on-demand. To use this feature, update the value of `volume.beta.kubernetes.io/storage-class` annotation in `orientdb.yaml` to one of the [NFS file-based storage classes supported in IBM Cloud](https://cloud.ibm.com/docs/containers/cs_apps.html#cs_apps_volume_claim): `ibmc-file-bronze` or `ibmc-file-silver` or `ibmc-file-gold`. Also change `accessModes` to `ReadWriteMany` and increase storage request to say 20GB.
 
 ```
 kind: PersistentVolumeClaim
@@ -255,7 +254,7 @@ spec:
   annotations:
 ```
 
-In case you are using Bluemix *lite* Kubernetes cluster, where NFS file storage is not supported, you can instead use [hostPath PersistentVolume](https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume). A hostPath PersistentVolume uses a file or directory on the Node to emulate network-attached storage. To create a hostPath PersistentVolume, review [local-volumes.yaml](local-volumes.yaml) and run `kubectl apply` command.
+In case you are using IBM Cloud *lite* Kubernetes cluster, where NFS file storage is not supported, you can instead use [hostPath PersistentVolume](https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume). A hostPath PersistentVolume uses a file or directory on the Node to emulate network-attached storage. To create a hostPath PersistentVolume, review [local-volumes.yaml](local-volumes.yaml) and run `kubectl apply` command.
 ```
 $ cat local-volumes.yaml
 apiVersion: v1
@@ -529,7 +528,7 @@ http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html#/
 
 # Troubleshooting
 
-* If you want to delete the OrientDB service from your Bluemix Kubernetes cluster, then run either of the following commands.
+* If you want to delete the OrientDB service from your IBM Cloud Kubernetes cluster, then run either of the following commands.
     ```
     $ kubectl delete -f orientdb.yaml
     ```
@@ -559,7 +558,7 @@ http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html#/
     $ kubectl get pods # Get the name of the OrientDB pod
     $ kubectl logs [OrientDB pod name]
     ```
-* If you want to delete your Bluemix Kubernetes cluster, then run the following command.
+* If you want to delete your IBM Cloud Kubernetes cluster, then run the following command.
     ```
     $ ibmcloud cs cluster-rm mycluster
     Remove the cluster? [mycluster] (Y/N)> Y
