@@ -67,9 +67,9 @@ This journey gives you step by step instructions for:
 
 Set up IBM Cloud and Kubernetes CLI as per instructions in https://cloud.ibm.com/docs/containers/cs_tutorials.html#cs_cluster_tutorial. The steps are repeated here for quick reference.
 
-  * Download and Install IBM Cloud CLI as per instructions in https://clis.ng.bluemix.net/ui/home.html. IBM Cloud CLI provides the command line interface to manage applications, containers, infrastructures, services and other resources in IBM Cloud. The prefix for running commands by using the IBM Cloud CLI is `bx`.
+  * Download and Install IBM Cloud CLI as per instructions in https://clis.ng.bluemix.net/ui/home.html. IBM Cloud CLI provides the command line interface to manage applications, containers, infrastructures, services and other resources in IBM Cloud. The prefix for running commands by using the IBM Cloud CLI is `ibmcloud`.
 
-  * Install the IBM Cloud Container Service plug-in, which allows you to create Kubernetes clusters and manage worker nodes. The prefix for running commands by using the IBM Cloud Container Service plug-in is `bx cs`.
+  * Install the IBM Cloud Container Service plug-in, which allows you to create Kubernetes clusters and manage worker nodes. The prefix for running commands by using the IBM Cloud Container Service plug-in is `ibmcloud cs`.
     ```
     $ ibmcloud plugin install container-service
     ```
