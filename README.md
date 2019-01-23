@@ -67,7 +67,7 @@ This journey gives you step by step instructions for:
 
 Set up IBM Cloud and Kubernetes CLI as per instructions in https://cloud.ibm.com/docs/containers/cs_tutorials.html#cs_cluster_tutorial. The steps are repeated here for quick reference.
 
-  * Download and Install IBM Cloud CLI as per instructions in https://clis.ng.bluemix.net/ui/home.html. IBM Cloud CLI provides the command line interface to manage applications, containers, infrastructures, services and other resources in IBM Cloud. The prefix for running commands by using the IBM Cloud CLI is `ibmcloud`.
+  * Download and Install IBM Cloud CLI as per instructions in https://cloud.ibm.com/docs/cli/index.html. IBM Cloud CLI provides the command line interface to manage applications, containers, infrastructures, services and other resources in IBM Cloud. The prefix for running commands by using the IBM Cloud CLI is `ibmcloud`.
 
   * Install the IBM Cloud Container Service plug-in, which allows you to create Kubernetes clusters and manage worker nodes. The prefix for running commands by using the IBM Cloud Container Service plug-in is `ibmcloud cs`.
     ```
@@ -203,7 +203,7 @@ Configure your Kubernetes CLI environment to point to your IBM Cloud Kubernetes 
 ### 2.1 Copy OrientDB Kubernetes configuration scripts
 Clone or download the OrientDB Kubernetes configuration scripts to your user home directory.
 ```
-$ git clone https://github.com/IBM/deploy-graph-db-container.git
+$ git clone https://github.com/IBM/deploy-graph-db-container
 ```
 
 Navigate to the source directory
@@ -482,7 +482,7 @@ http://<Public_IP_address>:<HTTP_NodePort>/studio/index.html#/
     ```
     $ kubectl exec -it orientdbservice-2043245721-81524  -- /orientdb/bin/console.sh
 
-    OrientDB console v.2.2.26 (build ae9fcb9c075e1d74560a336a96b57d3661234c7b) https://www.orientdb.com
+    OrientDB console v.2.2.26 (build ae9fcb9c075e1d74560a336a96b57d3661234c7b) https://orientdb.com/
     Type 'help' to display all the supported commands.
     Installing extensions for GREMLIN language v.2.6.0
 
